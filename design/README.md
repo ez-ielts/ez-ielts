@@ -14,5 +14,7 @@ This directory is the source of truth for product design before implementation.
 
 - [Product flow](product-flow.md): registration, diagnostic interview, skill analysis, plan creation, mock exams, and course adjustment.
 - [Design system](design-system.md): visual language, responsive rules, accessibility, and component conventions.
+- [Interview → course](interview-course.md): post-placement questionnaire, tutor interview and generated 8-week course.
+- [Voice examiner](voice-examiner.md): agent instructions, tool sequence, evidence policy, and finalization rules.
 
 Design files should describe behavior and decisions, not only screenshots or visual decoration.
