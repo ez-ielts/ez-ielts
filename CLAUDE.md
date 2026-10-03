@@ -39,6 +39,8 @@ The core journey is:
 
 ## Delivery workflow
 
-Use Gitflow: create a GitHub issue, assign it, create a focused `feature/<issue>-name` or `fix/<issue>-name` branch from `develop`, implement against the approved design, open a PR into `develop`, review and merge, then release from `develop` to `main`.
+**Until the first working release (pre-v1):** do not use `develop`. Create a GitHub issue, create a focused `feature/<issue>-name` or `fix/<issue>-name` branch from `main`, implement against the approved design, and open a PR into `main`. Every merge to `main` deploys to GitHub Pages.
+
+**After the first release is approved:** switch to Gitflow. Branch from `develop`, open PRs into `develop`, and release from `develop` to `main`.
 
 See [design/README.md](design/README.md) and [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) for the working agreements.
