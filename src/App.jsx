@@ -1,8 +1,12 @@
-import { ProductHeader } from './components/layout/ProductHeader'
+import { Route, Routes } from 'react-router-dom'
+import { InterviewScreen } from './components/interview/InterviewScreen'
 import { JourneyFlow } from './components/journey/JourneyFlow'
 import { JourneySidebar } from './components/journey/JourneySidebar'
+import { FocusHeader } from './components/layout/FocusHeader'
+import { ProductHeader } from './components/layout/ProductHeader'
+import { ScreenPlaceholder } from './components/layout/ScreenPlaceholder'
 
-function App() {
+function JourneyLayout() {
   return (
     <div className="min-h-screen bg-[#fbfaf6] text-[#202521]">
       <ProductHeader />
@@ -11,6 +15,26 @@ function App() {
         <main className="min-w-0"><JourneyFlow /></main>
       </div>
     </div>
+  )
+}
+
+function FocusLayout({ label, children }) {
+  return (
+    <div className="flex min-h-screen flex-col bg-ground text-ink">
+      <FocusHeader label={label} />
+      <main className="mx-auto w-full max-w-[1240px] flex-1">{children}</main>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<JourneyLayout />} />
+      <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
+      <Route path="/today" element={<ScreenPlaceholder title="Today" />} />
+      <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
+    </Routes>
   )
 }
 

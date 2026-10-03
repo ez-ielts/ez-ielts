@@ -2,7 +2,7 @@
 
 ## Product purpose
 
-ezIELTS is an exam-preparation platform. Its only product goal is helping learners prepare for and pass the IELTS exam. It is not a general English improvement app.
+ezIELTS is an exam-preparation platform. Its only product goal is helping learners prepare for and pass IELTS Academic or TOEFL iBT; the learner picks one exam and every screen follows it. It is not a general English improvement app.
 
 The core journey is:
 
@@ -15,7 +15,7 @@ The core journey is:
 
 ## Product principles
 
-- **Exam-first:** Every task must map to an IELTS skill, criterion, task type, or exam simulation.
+- **Exam-first:** Every task must map to a skill, criterion, task type, or exam simulation of the learner's exam (IELTS Academic or TOEFL iBT, scored on its own scale).
 - **Voice-first speaking:** Speaking assessment is a live, turn-based voice interaction with an examiner. Text is a fallback and evidence layer, not the main experience.
 - **Tool-mediated assessment:** The voice model records evidence through server-side tools; it must not invent, directly persist, or prematurely reveal scores.
 - **Evidence over optimism:** Scores and recommendations must be supported by diagnostic evidence and checkpoint performance.
