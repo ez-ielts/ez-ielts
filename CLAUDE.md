@@ -17,6 +17,7 @@ The core journey is:
 
 - **Exam-first:** Every task must map to an IELTS skill, criterion, task type, or exam simulation.
 - **Voice-first speaking:** Speaking assessment is a live, turn-based voice interaction with an examiner. Text is a fallback and evidence layer, not the main experience.
+- **Tool-mediated assessment:** The voice model records evidence through server-side tools; it must not invent, directly persist, or prematurely reveal scores.
 - **Evidence over optimism:** Scores and recommendations must be supported by diagnostic evidence and checkpoint performance.
 - **Realistic progression:** Default to the next achievable half-band, not an inflated promise.
 - **Conditional guarantee:** We may promise course adjustment and readiness support when learners complete assigned work; never claim an unconditional exam result.
@@ -32,6 +33,7 @@ The core journey is:
 - Keep `src/app` for application wiring, `src/features` for domain state and logic, `src/components` for reusable UI, and `src/lib` for shared configuration/utilities.
 - Use Tailwind CSS utilities and shared tokens for styling. Avoid new page-specific global CSS.
 - Keep API clients and side effects behind feature/service boundaries; do not call external APIs directly from presentational components.
+- Keep Realtime session creation and examiner tools server-side. Never expose an OpenAI API key or unrestricted persistence tool to the browser.
 - Keep components small enough to test independently and name event handlers by intent.
 - Validate every change with `npm run lint` and `npm run build`.
 
