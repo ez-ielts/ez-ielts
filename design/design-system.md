@@ -58,10 +58,6 @@ Recurring patterns:
 - **Ruled list**: same technique for rows; the current row gets a 4px left accent rule.
 - **Checkpoint rule**: list items with a 4px top rule, accent for checkpoint items, ink otherwise. Always paired with a text label.
 
-## Migration note
-
-The journey screens at `/` (`AccountStep`, `AssessmentStep`, `DiagnosisStep`, `StudyPlanStep`, `JourneySidebar`, `ProductHeader`) still use the previous warm-paper/green palette through hard-coded values. They now render in Archivo. Restyle them onto these tokens as each screen is rebuilt from the handoff.
-
 ## Accessibility
 
 - Use semantic headings, labels, buttons and form controls. `aria-pressed` on choice buttons, `role="radio"`/`aria-checked` on radio cards, `role="switch"` on toggles, `role="timer"` on countdowns, `role="alert"` on errors, `role="log"` for chat threads.

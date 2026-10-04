@@ -14,6 +14,7 @@ This directory is the source of truth for product design before implementation.
 
 - [Product flow](product-flow.md): registration, diagnostic interview, skill analysis, plan creation, mock exams, and course adjustment.
 - [Design system](design-system.md): visual language, responsive rules, accessibility, and component conventions.
+- [First page: exam choice and sign-up](sign-up.md): `/`, exam choice and Clerk registration.
 - [Interview → course](interview-course.md): post-placement questionnaire, tutor interview and generated 8-week course.
 - [App shell and Today](today.md): study-tab navigation (desktop tabs, mobile bottom bar) and the daily session screen.
 - [Voice examiner](voice-examiner.md): agent instructions, tool sequence, evidence policy, and finalization rules.
