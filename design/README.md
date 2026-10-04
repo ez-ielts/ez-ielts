@@ -22,6 +22,7 @@ This directory is the source of truth for product design before implementation.
 - [Checkpoint mock exam](mock-exam.md): `/mock/:id`, four timed sections, band calculation and plan adjustments.
 - [Progress](progress.md): sessions, weeks, late work, course completion and the next course.
 - [Placement](placement.md): `/placement`, short four-skill test and the confirmed start estimate.
+- [Backend contract](backend-contract.md): draft of every endpoint, shape and rule the frontend expects from the backend.
 - [Interview → course](interview-course.md): post-placement questionnaire, tutor interview and generated 8-week course.
 - [App shell and Today](today.md): study-tab navigation (desktop tabs, mobile bottom bar) and the daily session screen.
 - [Voice examiner](voice-examiner.md): agent instructions, tool sequence, evidence policy, and finalization rules.
