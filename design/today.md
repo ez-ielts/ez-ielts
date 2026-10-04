@@ -14,7 +14,7 @@ Design reference: Claude Design handoff `ezIELTS App.dc.html` (shell) and `EzTod
 Main column (flex 1.85, basis 420px) and aside (flex 1, basis 260px). The aside wraps below the main column on narrow screens.
 
 **Main**
-- Day kicker, H1 session title, lede. Start session → Continue session → Session complete (disabled). Reschedule → Plan.
+- Day kicker ("Week {n} · session {k} of {days}", from the plan), H1 session title, lede. Start session → Continue session → Session complete (disabled). Reschedule → Plan.
 - Today's session: a ruled list of 3 steps. The current step has a 4px accent left rule and an accent number chip with a Begin / Mark done action. Done steps get a ✓ chip and strike-through. A live progress line reads "n of 3 done · autosaves as you go".
 - Overdue band (accent border, accent-100 fill, "Overdue" kicker) → Homework. It reads the first overdue item from the `homework` slice and is hidden when nothing is overdue. It's a notice, not `role="alert"`.
 - Marked while you were away: surface cards in an auto-fit grid (min 210px). Each opens the marked essay (`/homework/:id`), a speaking retake (`/speaking/:id`) or Homework.

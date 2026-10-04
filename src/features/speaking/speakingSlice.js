@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
+import { submitHomeworkByRoute } from '../homework/homeworkSlice'
 import { requestMicrophone, SpeechError } from './speechService'
 import { buildTurnEvidence } from './speakingService'
 
@@ -64,6 +65,9 @@ export const startSession = ({ practiceId, totalTurns, mode }) => async (dispatc
 export const submitAnswer = ({ turn, text, seconds }) => (dispatch, getState) => {
   const { assessmentId } = getState().speaking
   dispatch(answerRecorded(buildTurnEvidence({ assessmentId, turn, text, seconds })))
+  // Finishing the practice submits the homework item that opens it.
+  const { stage, practiceId } = getState().speaking
+  if (stage === 'complete') dispatch(submitHomeworkByRoute(`/speaking/${practiceId}`))
 }
 
 export default speakingSlice.reducer

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { courseStages, courseWeeks, goalHint, goalOptions, intakeExams, intakeQuestions, intakeStages, studyHours } from '../../features/intake/intakeConfig'
+import { courseName } from '../../features/pricing/pricingConfig'
+import { courseStages, courseWeeks, goalHint, goalOptions, intakeQuestions, intakeStages, studyHours } from '../../features/intake/intakeConfig'
 import { answerChosen, beginInterview, reasonChanged, requestTutorReply, selectIntakeProfile, sendLearnerReply, stageChanged } from '../../features/intake/intakeSlice'
 import { startTrial } from '../../features/session/sessionSlice'
 import { StageStrip } from '../ui/StageStrip'
@@ -16,7 +17,6 @@ export function InterviewScreen() {
   const exam = useSelector((state) => state.session.exam)
   const intake = useSelector((state) => state.intake)
   const profile = useSelector(selectIntakeProfile)
-  const config = intakeExams[exam]
 
   const buildCourse = () => dispatch(stageChanged('course'))
 
@@ -58,7 +58,7 @@ export function InterviewScreen() {
 
       {intake.stage === 'course' && (
         <CourseSummary
-          courseName={config.course}
+          courseName={courseName(exam, profile.start)}
           start={profile.start}
           target={profile.target}
           goal={profile.goal}

@@ -7,6 +7,7 @@ import { AlertBand } from '../ui/AlertBand'
 import { Button } from '../ui/Button'
 import { Kicker } from '../ui/Kicker'
 import { AnnotatedEssay } from './AnnotatedEssay'
+import { AssignmentPage } from './AssignmentPage'
 import { CriteriaGrid } from './CriteriaGrid'
 
 const backLink = <Link to="/homework" className="inline-flex min-h-11 items-center self-start text-sm font-bold text-accent-700 underline underline-offset-[3px]">← Homework</Link>
@@ -24,14 +25,8 @@ export function MarkedEssay() {
 
   if (status === 'failed') return <Message><AlertBand kicker="Couldn't load homework" action={<Button variant="primary" onClick={retry}>Try again</Button>}>Check your connection and try again.</AlertBand></Message>
   if (status !== 'ready') return <Message><p role="status" className="m-0 text-sm text-neutral-800">Loading…</p></Message>
-  if (!item?.feedback) {
-    return (
-      <Message>
-        <h1 className="m-0 text-[clamp(26px,4vw,40px)] leading-[1.05] font-extrabold tracking-[-.025em]">{item?.title ?? 'Assignment'}</h1>
-        <p className="m-0 max-w-[52ch] text-neutral-800">{item ? 'This assignment has not been marked yet. Submit your work to receive marking and feedback.' : 'We could not find that assignment.'}</p>
-      </Message>
-    )
-  }
+  if (!item) return <Message><p className="m-0 max-w-[52ch] text-neutral-800">We could not find that assignment.</p></Message>
+  if (!item.feedback) return <Message><AssignmentPage item={item} /></Message>
 
   const { feedback } = item
   return (
