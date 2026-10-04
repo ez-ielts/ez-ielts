@@ -6,11 +6,14 @@
 
 `develop` is not used. `main` is the integration branch, and every merge to it deploys to GitHub Pages.
 
-1. Create a GitHub issue with the user outcome, acceptance criteria, and test notes.
+1. Create a GitHub issue for the task (user outcome, acceptance criteria, test notes) and assign it to the maintainer. One issue per task.
 2. Create a branch from `main`: `feature/<issue-number>-short-name` or `fix/<issue-number>-short-name`.
 3. Implement the smallest reusable component or feature slice, and keep the branch focused.
 4. Run `npm run lint` and `npm run build` before opening a pull request.
-5. Open a pull request into `main`, link the issue, and request review.
+5. Open a pull request into `main`, link the issue (`Closes #<issue>`), assign it to the maintainer, and request review.
+6. Wait for the merge before starting the next task; start it from the updated `main`.
+
+Design lives in `design/` and is updated before or with the implementation.
 
 ### After the first release
 

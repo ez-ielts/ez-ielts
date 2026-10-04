@@ -39,8 +39,17 @@ The core journey is:
 
 ## Delivery workflow
 
-**Until the first working release (pre-v1):** do not use `develop`. Create a GitHub issue, create a focused `feature/<issue>-name` or `fix/<issue>-name` branch from `main`, implement against the approved design, and open a PR into `main`. Every merge to `main` deploys to GitHub Pages.
+The long-term model is Gitflow, but **until the first working release (pre-v1) nothing is pushed to `develop`: `main` is the integration branch.** Every merge to `main` deploys to GitHub Pages.
 
-**After the first release is approved:** switch to Gitflow. Branch from `develop`, open PRs into `develop`, and release from `develop` to `main`.
+Work one task at a time:
+
+1. **Issue first:** every task gets a GitHub issue (user outcome, acceptance criteria, validation) assigned to the maintainer before any implementation.
+2. **Design first:** update the relevant file in `design/` (the design is produced with Claude Design and lives there) before building a new product surface.
+3. **Branch from `main`:** `feature/<issue>-name` or `fix/<issue>-name` (or the branch the session/tooling designates).
+4. **Implement, validate, commit, push:** run `npm run lint` and `npm run build`, commit with a clear message, push.
+5. **Open a PR into `main`** that links the issue (`Closes #<issue>`), assigned to the maintainer, for review.
+6. **Wait for merge**, then start the next task from the updated `main`. Do not stack new work on a merged branch.
+
+**After the first release is approved:** switch fully to Gitflow. Branch from `develop`, open PRs into `develop`, and release from `develop` to `main`. Recreate `develop` from `main` at that point.
 
 See [design/README.md](design/README.md) and [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) for the working agreements.
