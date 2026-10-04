@@ -17,6 +17,7 @@ export const selectTutorContext = createSelector([selectPlan, selectOverdueItem]
     course: plan.course,
     start: plan.start,
     target: plan.target,
+    goal: plan.goal,
     week: plan.currentWeek,
     totalWeeks: plan.totalWeeks,
     mins: plan.mins,

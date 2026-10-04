@@ -10,7 +10,7 @@ Stage strip: Questionnaire · Tutor interview · Your course.
 
 Six questions, five as choice buttons:
 
-1. Target score: the exam's three targets. The default is the middle option, one step from the placement estimate.
+1. Goal score: the exam's three goals, starting at the next half-band (IELTS 6.0 / 6.5 / 7.0 from a 5.5 start; TOEFL 4.0 / 4.5 / 5.0 from 3.5). The default is the first. **A course never jumps to the goal:** each course takes the learner up one half-band, so a bigger goal becomes a chain of courses (5.5 → 6.0 → 6.5 → 7.0). The hint says so.
 2. Exam date: Not booked / In 8–10 weeks (default) / In 4–8 weeks / Under 4 weeks.
 3. Minutes per day: 30 / 45 (default) / 60 / 90.
 4. Days per week: 3 / 5 (default) / 6.
@@ -21,7 +21,7 @@ Six questions, five as choice buttons:
 
 ### 2. Tutor interview
 
-- Left: H1, explanation, summary table (estimate, target, time, exam date, focus).
+- Left: H1, explanation, summary table (estimate, target, goal when it differs, time, exam date, focus).
 - Right: chat thread (`role="log"`). Tutor messages are outlined; learner messages are ink-filled and right-aligned.
 - The tutor asks one question at a time. After 3 learner replies it sends a 2-sentence summary ending with `[DONE]`. The marker is stripped, the input is replaced by "Interview complete." and "Build my course".
 - Loading: "Tutor is typing…" pulse; Send is disabled.
@@ -30,7 +30,8 @@ Six questions, five as choice buttons:
 
 ### 3. Your course
 
-- Kicker "Your course · {course name}", H1 "{start} to {target} in 8 weeks".
+- Kicker "Your course · {course name}", H1 "{start} to {target} in 8 weeks", where the target is always the next half-band.
+- When the goal is more than one half-band away, a **roadmap** ("Your path to {goal}") shows the chain of courses: "Course 1 · this course {start} → {target}", the next courses, and "Reaches your goal" on the last. Statuses are text.
 - CTAs: Start 7-day free trial (sets `session.tier = 'trial'`, goes to `/today`) and See course price (`/pricing`).
 - Fact grid: length, daily session, study total (minutes × days × 8 weeks), checkpoints.
 - 8-week list. Weeks 4 and 8 are checkpoint mocks with accent top rules.
@@ -38,7 +39,7 @@ Six questions, five as choice buttons:
 
 ## Exams
 
-IELTS Academic (start 5.5, targets 6.0 / 6.5 / 7.0) and TOEFL iBT on the 1–6 scale (start 3.5, targets 4.0 / 4.5 / 5.0), each with its own week plan. Driven by `session.exam`. Data in `src/features/intake/intakeConfig.js`. The start estimate is a placeholder until the placement slice supplies it.
+IELTS Academic (start 5.5, course 5.5 → 6.0, goals 6.0 / 6.5 / 7.0) and TOEFL iBT on the 1–6 scale (start 3.5, course 3.5 → 4.0, goals 4.0 / 4.5 / 5.0), each with its own week plan. Driven by `session.exam`. Data in `src/features/intake/intakeConfig.js`. The start estimate is a placeholder until the placement slice supplies it.
 
 ## Service boundary
 

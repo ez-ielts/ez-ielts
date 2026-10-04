@@ -1,5 +1,5 @@
 import { createSelector, createSlice } from '@reduxjs/toolkit'
-import { courseWeeks, intakeExams, studyHours } from '../intake/intakeConfig'
+import { courseStages, courseWeeks, intakeExams, studyHours } from '../intake/intakeConfig'
 import { selectIntakeProfile } from '../intake/intakeSlice'
 
 // Placeholder progress until it is derived from completed sessions and mock results.
@@ -26,6 +26,8 @@ export const selectPlan = createSelector([selectExam, selectIntakeProfile, selec
   course: intakeExams[exam].course,
   start: profile.start,
   target: profile.target,
+  goal: profile.goal,
+  stages: courseStages(profile.start, profile.goal),
   mins: profile.mins,
   days: profile.days,
   date: profile.date,

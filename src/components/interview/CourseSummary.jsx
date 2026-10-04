@@ -1,10 +1,11 @@
 import { GuaranteeConditions } from '../course/GuaranteeConditions'
+import { Roadmap } from '../course/Roadmap'
 import { WeekList } from '../course/WeekList'
 import { Button } from '../ui/Button'
 import { Kicker } from '../ui/Kicker'
 
 // facts: [{ label, value, note }]; weeks: [{ title, focus, checkpoint }]
-export function CourseSummary({ courseName, start, target, facts, weeks, onStartTrial, onSeePricing }) {
+export function CourseSummary({ courseName, start, target, goal, stages, facts, weeks, onStartTrial, onSeePricing }) {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-end gap-6 border-b-2 border-ink pb-4">
@@ -29,6 +30,8 @@ export function CourseSummary({ courseName, start, target, facts, weeks, onStart
       </dl>
 
       <WeekList weeks={weeks} />
+
+      <Roadmap goal={goal} stages={stages} />
 
       <GuaranteeConditions target={target} />
     </div>

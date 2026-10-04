@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { selectPlan } from '../../features/plan/planSlice'
 import { GuaranteeConditions } from '../course/GuaranteeConditions'
+import { Roadmap } from '../course/Roadmap'
 import { WeekList } from '../course/WeekList'
 import { Kicker } from '../ui/Kicker'
 import { AdaptationRules } from './AdaptationRules'
@@ -41,6 +42,8 @@ export function PlanScreen() {
           </div>
         ))}
       </dl>
+
+      <Roadmap goal={plan.goal} stages={plan.stages} />
 
       <Section id="plan-weeks" title="Course weeks">
         <WeekList weeks={plan.weeks} currentWeek={plan.currentWeek} checkpointTo={(week) => `/mock/week-${week}`} checkpointResults={plan.checkpoints} />

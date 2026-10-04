@@ -22,7 +22,7 @@ Route: `/mock/:id` (focus mode, header label "Checkpoint mock", "Save and exit" 
 
 ## Plan adjustments (feeds the plan)
 
-`planAdjustments` compares each skill with the pace for this checkpoint: `start + (target − start) × week / total weeks`, rounded to a half band.
+`planAdjustments` compares each skill with the pace for this checkpoint: `start + (target − start) × week / total weeks`, rounded **down** to a half band, where the target is the course's half-band target (so the first checkpoint expects skills at least at the start band, and the last expects the target).
 - A skill below pace adds "Extra {skill} practice": two extra sessions a week until the next checkpoint.
 - Overdue homework adds "Late work": the next session is shortened to make room; a second late submission voids the guarantee.
 - If every skill is on pace and nothing is overdue: "Plan unchanged".

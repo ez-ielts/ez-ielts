@@ -5,8 +5,7 @@ export const intakeExams = {
   ielts: {
     label: examLabels.ielts,
     start: '5.5',
-    targets: ['6.0', '6.5', '7.0'],
-    course: 'Core 5.5 → 6.5',
+    course: 'Core 5.5 → 6.0',
     weeks: [
       ['Diagnose and rebuild', 'Task 2 structure, articles'],
       ['Task 1 data language', 'Trend verbs, overview sentence'],
@@ -21,8 +20,7 @@ export const intakeExams = {
   toefl: {
     label: examLabels.toefl,
     start: '3.5',
-    targets: ['4.0', '4.5', '5.0'],
-    course: 'Core 3.5 → 4.5',
+    course: 'Core 3.5 → 4.0',
     weeks: [
       ['Diagnose and rebuild', 'Build a Sentence, grammar'],
       ['Write an Email', 'Register, task coverage'],
@@ -44,18 +42,31 @@ export const intakeStages = ['Questionnaire', 'Tutor interview', 'Your course']
 
 export const skills = ['Listening', 'Reading', 'Writing', 'Speaking']
 
-// `options` of null means the list depends on the exam (targets).
+// `options` of null means the list depends on the exam (goals).
 export const intakeQuestions = [
-  { key: 'target', label: 'Target score', options: null },
+  { key: 'goal', label: 'Your goal score', options: null },
   { key: 'date', label: 'When is your exam?', options: ['Not booked', 'In 8–10 weeks', 'In 4–8 weeks', 'Under 4 weeks'], hint: 'Under 4 weeks compresses the course and lowers the guaranteed target.' },
   { key: 'mins', label: 'Minutes per day', options: ['30 min', '45 min', '60 min', '90 min'], hint: '45 minutes is the course default.' },
   { key: 'days', label: 'Days per week', options: ['3 days', '5 days', '6 days'] },
   { key: 'weak', label: 'Which skill worries you most?', options: skills, hint: 'This weights the drill queue, not the schedule.' },
 ]
 
-export const targetHint = (target) => `${target} is the default: one full step from your estimate, reachable in 8 weeks.`
+// A course takes the learner up exactly one half-band. A bigger goal is a chain of courses (5.5 → 6.0 → 6.5 → 7.0).
+const BAND_STEP = 0.5
+const formatBand = (value) => value.toFixed(1)
 
-export const defaultTarget = (exam) => intakeExams[exam].targets[1]
+export const courseTarget = (start) => formatBand(Number(start) + BAND_STEP)
+
+export const goalOptions = (start) => [1, 2, 3].map((steps) => formatBand(Number(start) + steps * BAND_STEP))
+
+export const goalHint = (start, target) => `Each course takes you up one half-band, so a bigger goal is reached in stages: ${start} → ${target} first. Your next course starts from your result.`
+
+// The chain of courses from the start estimate to the goal: [{ from, to }].
+export function courseStages(start, goal) {
+  const stages = []
+  for (let from = Number(start); from < Number(goal); from += BAND_STEP) stages.push({ from: formatBand(from), to: formatBand(from + BAND_STEP) })
+  return stages
+}
 
 export function studyHours({ mins, days }) {
   return Math.round(parseInt(mins, 10) * parseInt(days, 10) * 8 / 60)
