@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export const examLabels = { ielts: 'IELTS Academic', toefl: 'TOEFL iBT' }
+
 const initialState = {
   exam: 'ielts', // 'ielts' | 'toefl'
   tier: null, // null until the learner starts a trial or buys a course: 'trial' | 'foundation' | 'bridge' | 'core' | 'advanced' | 'mastery'

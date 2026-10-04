@@ -1,10 +1,12 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { InterviewScreen } from './components/interview/InterviewScreen'
 import { JourneyFlow } from './components/journey/JourneyFlow'
 import { JourneySidebar } from './components/journey/JourneySidebar'
+import { AppLayout } from './components/layout/AppLayout'
 import { FocusHeader } from './components/layout/FocusHeader'
 import { ProductHeader } from './components/layout/ProductHeader'
 import { ScreenPlaceholder } from './components/layout/ScreenPlaceholder'
+import { TodayScreen } from './components/today/TodayScreen'
 
 function JourneyLayout() {
   return (
@@ -18,11 +20,13 @@ function JourneyLayout() {
   )
 }
 
-function FocusLayout({ label, children }) {
+// Focus mode: no tabs. `exitTo` adds "Save and exit" (not shown during onboarding).
+function FocusLayout({ label, exitTo, children }) {
+  const navigate = useNavigate()
   return (
     <div className="flex min-h-screen flex-col bg-ground text-ink">
-      <FocusHeader label={label} />
-      <main className="mx-auto w-full max-w-[1240px] flex-1">{children}</main>
+      <FocusHeader label={label} onExit={exitTo ? () => navigate(exitTo) : undefined} />
+      <div className="mx-auto w-full max-w-[1240px] flex-1">{children}</div>
     </div>
   )
 }
@@ -32,8 +36,16 @@ function App() {
     <Routes>
       <Route path="/" element={<JourneyLayout />} />
       <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
-      <Route path="/today" element={<ScreenPlaceholder title="Today" />} />
-      <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
+      <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><ScreenPlaceholder title="Speaking practice" /></FocusLayout>} />
+      <Route element={<AppLayout />}>
+        <Route path="/today" element={<TodayScreen />} />
+        <Route path="/plan" element={<ScreenPlaceholder title="Plan" />} />
+        <Route path="/homework" element={<ScreenPlaceholder title="Homework" />} />
+        <Route path="/homework/:id" element={<ScreenPlaceholder title="Marked essay" />} />
+        <Route path="/tutor" element={<ScreenPlaceholder title="Tutor" />} />
+        <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
+        <Route path="/settings" element={<ScreenPlaceholder title="Settings" />} />
+      </Route>
     </Routes>
   )
 }
