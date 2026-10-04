@@ -1,5 +1,7 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { RequireAuth } from './components/auth/RequireAuth'
+import { SsoCallback } from './components/auth/SsoCallback'
+import { authEnabled } from './features/auth/authConfig'
 import { InterviewScreen } from './components/interview/InterviewScreen'
 import { JourneyFlow } from './components/journey/JourneyFlow'
 import { JourneySidebar } from './components/journey/JourneySidebar'
@@ -36,6 +38,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<JourneyLayout />} />
+      {authEnabled && <Route path="/sso-callback" element={<SsoCallback />} />}
       <Route element={<RequireAuth />}>
         <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
         <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><ScreenPlaceholder title="Speaking practice" /></FocusLayout>} />

@@ -12,7 +12,7 @@ A learner should move from an unknown starting level to a personalized, exam-foc
 - Collect only the minimum account information needed to begin assessment.
 - Show privacy and consent language before account creation.
 - Provider: Clerk (`@clerk/clerk-react`), configured with `VITE_CLERK_PUBLISHABLE_KEY` (public key only; the secret key never reaches this app). Without a key the app falls back to the local placeholder form for development.
-- Journey step 1 embeds Clerk sign-up (virtual routing) with a toggle to sign-in. When signed in it shows the account and "Continue to your assessment".
+- Journey step 1 embeds Clerk sign-up (hash routing, so OAuth returns to the page the form is mounted on; `/sso-callback` also completes the redirect) with a toggle to sign-in. When signed in it shows the account and "Continue to your assessment".
 - Header controls: signed out → Sign in / Sign up (modal); signed in → Clerk user menu with a Settings link. Present in the study header and the journey header.
 - Route guard: `/interview`, `/speaking/*` and the study tabs require a signed-in user; signed-out visitors return to `/`. Loading shows a status message.
 - Sign-in, phone, Google and Apple are enabled in the Clerk dashboard, not in code.
