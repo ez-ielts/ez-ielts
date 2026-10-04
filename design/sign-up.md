@@ -1,6 +1,6 @@
 # First page: exam choice and sign-up
 
-Route: `/` (focus mode, header label "Create account", no exit). Stage strip: Create account · Questionnaire · Tutor interview · Your course. Replaces the old four-step journey (account, AI assessment, diagnosis, plan), which the interview → course flow and the Today screen supersede.
+Route: `/` (focus mode, header label "Create account", no exit). Stage strip: Create account · Placement · Questionnaire · Tutor interview · Your course. Replaces the old four-step journey (account, AI assessment, diagnosis, plan), which the interview → course flow and the Today screen supersede.
 
 ## Layout
 
@@ -13,7 +13,7 @@ Two wrapping columns inside the standard content width (`px-[clamp(16px,4vw,40px
 
 **Right (flex 1 1 360px)**
 - Signed out: Clerk sign-up themed with design tokens (accent primary, 0 radius, Archivo, ink 2px border). Below it a ghost button switches between "Already have an account? Sign in" and "New here? Create an account". Email, phone, Google and Apple are enabled in the Clerk dashboard.
-- Signed in: bordered panel "Signed in as {email}", primary "Continue to your questionnaire" (→ `/interview`, 52px) and a secondary link "Go to Today".
+- Signed in: bordered panel "Signed in as {email}", primary "Continue to placement" (→ `/placement`, 52px) and a secondary link "Go to Today".
 - Auth loading (Clerk script not ready): a "Loading…" status line.
 - No `VITE_CLERK_PUBLISHABLE_KEY` (development only): `AlertBand` "Sign-in is not configured", with a Continue link to `/interview`.
 

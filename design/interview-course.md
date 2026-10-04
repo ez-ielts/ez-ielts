@@ -4,7 +4,7 @@ Route: `/interview` (focus mode, header label "Interview", no exit). Follows the
 
 ## Stages
 
-Stage strip: Questionnaire · Tutor interview · Your course.
+Stage strip: Create account · Placement · Questionnaire · Tutor interview · Your course (the first two are done).
 
 ### 1. Questionnaire
 
@@ -39,7 +39,7 @@ Six questions, five as choice buttons:
 
 ## Exams
 
-IELTS Academic (start 5.5, course 5.5 → 6.0, goals 6.0 / 6.5 / 7.0) and TOEFL iBT on the 1–6 scale (start 3.5, course 3.5 → 4.0, goals 4.0 / 4.5 / 5.0), each with its own week plan. Driven by `session.exam`. Data in `src/features/intake/intakeConfig.js`. The start estimate is state (`intake.start` per exam, initially the config value) so a finished course can start the next one from its confirmed result; the placement slice will set it the first time. The course name is derived from the start (the pricing level whose range begins at it, e.g. "Core 5.5 → 6.0").
+IELTS Academic (start 5.5, course 5.5 → 6.0, goals 6.0 / 6.5 / 7.0) and TOEFL iBT on the 1–6 scale (start 3.5, course 3.5 → 4.0, goals 4.0 / 4.5 / 5.0), each with its own week plan. Driven by `session.exam`. Data in `src/features/intake/intakeConfig.js`. The start estimate is state (`intake.start` per exam, initially the config value) so a finished course can start the next one from its confirmed result; the [placement](placement.md) test sets it the first time. The course name is derived from the start (the pricing level whose range begins at it, e.g. "Core 5.5 → 6.0").
 
 ## Service boundary
 

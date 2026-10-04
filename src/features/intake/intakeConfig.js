@@ -38,6 +38,9 @@ export const courseWeeks = (exam) => intakeExams[exam].weeks.map(([title, focus]
 
 export const intakeStages = ['Questionnaire', 'Tutor interview', 'Your course']
 
+// Every onboarding screen shows the same strip; each marks its own step as current.
+export const onboardingStages = ['Create account', 'Placement', ...intakeStages]
+
 export const skills = ['Listening', 'Reading', 'Writing', 'Speaking']
 
 // `options` of null means the list depends on the exam (goals).

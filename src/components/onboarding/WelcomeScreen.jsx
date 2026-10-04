@@ -1,4 +1,4 @@
-import { intakeStages } from '../../features/intake/intakeConfig'
+import { onboardingStages } from '../../features/intake/intakeConfig'
 import { AccountPanel } from '../auth/AccountPanel'
 import { Kicker } from '../ui/Kicker'
 import { StageStrip } from '../ui/StageStrip'
@@ -14,7 +14,7 @@ const facts = [
 export function WelcomeScreen() {
   return (
     <main className="flex flex-col gap-6 px-[clamp(16px,4vw,40px)] py-6">
-      <StageStrip stages={['Create account', ...intakeStages]} current={0} />
+      <StageStrip stages={onboardingStages} current={0} />
       <div className="flex flex-wrap gap-x-[clamp(24px,5vw,64px)] gap-y-8">
         <section className="flex min-w-0 flex-[1_1_320px] flex-col gap-6">
           <div>

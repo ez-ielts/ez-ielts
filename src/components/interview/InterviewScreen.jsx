@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { courseName } from '../../features/pricing/pricingConfig'
-import { courseStages, courseWeeks, goalHint, goalOptions, intakeQuestions, intakeStages, studyHours } from '../../features/intake/intakeConfig'
+import { courseStages, courseWeeks, goalHint, goalOptions, intakeQuestions, onboardingStages, studyHours } from '../../features/intake/intakeConfig'
 import { answerChosen, beginInterview, reasonChanged, requestTutorReply, selectIntakeProfile, sendLearnerReply, stageChanged } from '../../features/intake/intakeSlice'
 import { startTrial } from '../../features/session/sessionSlice'
 import { StageStrip } from '../ui/StageStrip'
@@ -22,7 +22,7 @@ export function InterviewScreen() {
 
   return (
     <main className="flex flex-col gap-6 px-[clamp(16px,4vw,40px)] py-6">
-      <StageStrip stages={intakeStages} current={stageIndex[intake.stage]} />
+      <StageStrip stages={onboardingStages} current={2 + stageIndex[intake.stage]} />
 
       {intake.stage === 'questionnaire' && (
         <IntakeQuestionnaire

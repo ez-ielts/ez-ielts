@@ -22,6 +22,12 @@ export const pricingTiers = {
 // The pricing level whose half-band step begins at the learner's start estimate, if there is one.
 export const courseTier = (exam, start) => pricingTiers[exam].find((tier) => tier.range.startsWith(`${start} `)) ?? null
 
+// The starts the course levels cover (the start of each half-band step). Placement estimates are limited to these.
+export const supportedStarts = (exam) => pricingTiers[exam].map((tier) => tier.range.split(' ')[0])
+
+// The supported start nearest to a band (ties go up).
+export const nearestStart = (exam, band) => supportedStarts(exam).reduce((best, start) => (Math.abs(Number(start) - band) < Math.abs(Number(best) - band) || (Math.abs(Number(start) - band) === Math.abs(Number(best) - band) && Number(start) > Number(best)) ? start : best))
+
 export const courseName = (exam, start) => `${courseTier(exam, start)?.name ?? 'Course'} ${start} → ${courseTarget(start)}`
 
 export const includedInEveryCourse = [

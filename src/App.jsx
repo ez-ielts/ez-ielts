@@ -7,6 +7,7 @@ import { InterviewScreen } from './components/interview/InterviewScreen'
 import { AppLayout } from './components/layout/AppLayout'
 import { FocusHeader } from './components/layout/FocusHeader'
 import { WelcomeScreen } from './components/onboarding/WelcomeScreen'
+import { PlacementScreen } from './components/placement/PlacementScreen'
 import { PlanScreen } from './components/plan/PlanScreen'
 import { MockScreen } from './components/mock/MockScreen'
 import { PricingScreen } from './components/pricing/PricingScreen'
@@ -33,6 +34,7 @@ function App() {
       <Route path="/" element={<FocusLayout label="Create account"><WelcomeScreen /></FocusLayout>} />
       {authEnabled && <Route path="/sso-callback" element={<SsoCallback />} />}
       <Route element={<RequireAuth />}>
+        <Route path="/placement" element={<FocusLayout label="Placement"><PlacementScreen /></FocusLayout>} />
         <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
         <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><SpeakingScreen /></FocusLayout>} />
         <Route path="/mock/:id" element={<FocusLayout label="Checkpoint mock" exitTo="/plan"><MockScreen /></FocusLayout>} />
