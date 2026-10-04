@@ -1,7 +1,7 @@
-import { roundHalf } from '../mock/mockExamService'
+const floorHalf = (value) => Math.floor(value * 2) / 2
 
-// Pace for a checkpoint: a straight line from the start estimate to the target over the whole course.
-export const expectedBand = ({ start, target, week, totalWeeks }) => roundHalf(Number(start) + ((Number(target) - Number(start)) * week) / totalWeeks)
+// Pace for a checkpoint: a straight line from the start estimate to the half-band course target over the whole course, rounded down to a half band.
+export const expectedBand = ({ start, target, week, totalWeeks }) => floorHalf(Number(start) + ((Number(target) - Number(start)) * week) / totalWeeks)
 
 // Turns a checkpoint result (and any overdue homework) into plan adjustments. Rules are in design/mock-exam.md.
 export function planAdjustments({ skills, start, target, week, totalWeeks, overdue }) {

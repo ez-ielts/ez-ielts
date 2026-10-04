@@ -18,7 +18,8 @@ export function TutorScreen() {
 
   const rows = [
     { label: 'Exam', value: examLabels[exam] },
-    { label: 'Estimate → target', value: `${context.start} → ${context.target}` },
+    { label: 'This course', value: `${context.start} → ${context.target}` },
+    { label: 'Goal', value: context.goal },
     { label: 'This week', value: `${context.week} of ${context.totalWeeks}` },
     { label: 'Focus skills', value: context.focus.join(', ') },
     { label: 'Overdue', value: context.overdue ?? 'Nothing' },

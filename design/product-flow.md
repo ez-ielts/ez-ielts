@@ -36,7 +36,7 @@ A learner should move from an unknown starting level to a personalized, exam-foc
 
 ### 4. Personalized plan
 
-- Default target: the next realistic half-band.
+- Default target: the next realistic half-band. A course always targets exactly one half-band above the confirmed start; a larger goal is reached through consecutive courses (5.5 → 6.0 → 6.5 → 7.0), never in one.
 - Plan includes weekly tasks, Cambridge-aligned material references, feedback loops, and checkpoint mocks.
 - Include estimated duration, study frequency, exam date, and reminder preferences.
 - Never promise a band without a completion condition and evidence policy.
@@ -51,5 +51,5 @@ A learner should move from an unknown starting level to a personalized, exam-foc
 
 - A learner can complete the flow on a mobile viewport.
 - Every step has loading, error, back/retry, and completion states in the API-backed version.
-- A target score is never more than one default half-band above the confirmed starting score without explicit evidence.
+- A course target is never more than one half-band above the confirmed starting score. Longer goals are a chain of courses, each starting from the confirmed result of the one before.
 - A mock exam score uses the same band calculation rules as the relevant IELTS exam format.

@@ -8,7 +8,7 @@ export function TierRow({ tier, mine, current, onChoose }) {
       <div className="min-w-0 flex-[1_1_220px]">
         {mine && <Kicker spacing="normal" tone="accent">Your course</Kicker>}
         <div className="text-[17px] font-extrabold">{tier.name}</div>
-        <div className="mt-0.5 text-[12.5px] text-neutral-800">{tier.range} · 8 weeks</div>
+        <div className="mt-0.5 text-[12.5px] text-neutral-800">{tier.range} · one half-band · 8 weeks</div>
       </div>
       <span className="text-2xl font-extrabold tracking-[-.02em]">${tier.price}</span>
       {current

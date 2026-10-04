@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { defaultTarget, intakeExams } from './intakeConfig'
+import { courseTarget, goalOptions, intakeExams } from './intakeConfig'
 import { requestIntakeReply } from './intakeService'
 
 const initialState = {
   stage: 'questionnaire', // 'questionnaire' | 'interview' | 'course'
-  answers: { target: null, date: 'In 8–10 weeks', mins: '45 min', days: '5 days', weak: 'Writing' },
+  answers: { goal: null, date: 'In 8–10 weeks', mins: '45 min', days: '5 days', weak: 'Writing' },
   reason: '',
   messages: [], // { role: 'user' | 'assistant', content }
   status: 'idle', // 'idle' | 'loading' | 'failed'
@@ -12,11 +12,14 @@ const initialState = {
   done: false,
 }
 
-// A null target follows the exam's default, so switching exam never leaves a target from the other scale.
+// The course target is always the next half-band. A null or out-of-scale goal follows the target, so switching exam never leaves a goal from the other scale.
 export const selectIntakeProfile = (state) => {
   const { exam } = state.session
   const { answers, reason } = state.intake
-  return { ...answers, target: answers.target ?? defaultTarget(exam), start: intakeExams[exam].start, reason }
+  const { start } = intakeExams[exam]
+  const target = courseTarget(start)
+  const goal = goalOptions(start).includes(answers.goal) ? answers.goal : target
+  return { ...answers, goal, target, start, reason }
 }
 
 export const requestTutorReply = createAsyncThunk(

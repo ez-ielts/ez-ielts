@@ -6,7 +6,7 @@ Routes: `/pricing` (opened by Upgrade in the header and "See course price" in th
 
 - Header: kicker "Pricing", H1 "One course, built for your target", lede that the guarantee is conditional.
 - **Your status** (ruled box): no tier → "Start your 7-day free trial" (primary); trial → "Your free trial is active" and the trial counts as the current plan; paid → "You are on {course}".
-- **Courses**: ruled list of the five course levels (Foundation, Bridge, Core, Advanced, Mastery), each with its band range for the learner's exam scale, "8 weeks" and the price. The learner's own course (from the intake, e.g. Core) is marked "Your course" in text and carries the primary action "Choose this course"; others have a secondary "Choose".
+- **Courses**: ruled list of the five course levels (Foundation, Bridge, Core, Advanced, Mastery), each one half-band step on the learner's exam scale (IELTS 4.5 → 5.0, 5.0 → 5.5, 5.5 → 6.0, 6.0 → 6.5, 6.5 → 7.0; TOEFL 2.5 → 3.0 … 4.5 → 5.0), "8 weeks" and the price. The learner's own course (from the intake, e.g. Core) is marked "Your course" in text and carries the primary action "Choose this course"; others have a secondary "Choose".
 - **Included in every course** (ruled grid): daily session, two checkpoint mocks, marked writing and speaking, tutor chat, reminders.
 - Guarantee conditions: the shared, always-conditional copy.
 - Payments are not connected. Choosing a course sets the tier and shows "Course selected. Checkout opens here once payments are connected."

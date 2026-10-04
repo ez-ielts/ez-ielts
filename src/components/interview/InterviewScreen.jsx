@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { courseWeeks, intakeExams, intakeQuestions, intakeStages, studyHours, targetHint } from '../../features/intake/intakeConfig'
+import { courseStages, courseWeeks, goalHint, goalOptions, intakeExams, intakeQuestions, intakeStages, studyHours } from '../../features/intake/intakeConfig'
 import { answerChosen, beginInterview, reasonChanged, requestTutorReply, selectIntakeProfile, sendLearnerReply, stageChanged } from '../../features/intake/intakeSlice'
 import { startTrial } from '../../features/session/sessionSlice'
 import { StageStrip } from '../ui/StageStrip'
@@ -26,7 +26,7 @@ export function InterviewScreen() {
 
       {intake.stage === 'questionnaire' && (
         <IntakeQuestionnaire
-          questions={intakeQuestions.map((question) => question.key === 'target' ? { ...question, options: config.targets, hint: targetHint(config.targets[1]) } : question)}
+          questions={intakeQuestions.map((question) => question.key === 'goal' ? { ...question, options: goalOptions(profile.start), hint: goalHint(profile.start, profile.target) } : question)}
           profile={profile}
           reason={intake.reason}
           onChoose={(key, value) => dispatch(answerChosen({ key, value }))}
@@ -40,6 +40,7 @@ export function InterviewScreen() {
           summary={[
             { label: 'Estimate', value: profile.start },
             { label: 'Target', value: profile.target },
+            ...(profile.goal === profile.target ? [] : [{ label: 'Goal', value: profile.goal }]),
             { label: 'Time', value: `${profile.mins} × ${profile.days}` },
             { label: 'Exam', value: profile.date },
             { label: 'Focus', value: profile.weak },
@@ -60,6 +61,8 @@ export function InterviewScreen() {
           courseName={config.course}
           start={profile.start}
           target={profile.target}
+          goal={profile.goal}
+          stages={courseStages(profile.start, profile.goal)}
           facts={[
             { label: 'Length', value: '8 weeks', note: `${profile.days} a week` },
             { label: 'Daily session', value: profile.mins, note: 'lesson, practice, drill' },
