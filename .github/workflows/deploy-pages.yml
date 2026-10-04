@@ -39,6 +39,8 @@ jobs:
         run: npm run build
         env:
           VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
+          # Empty keeps the mock data; set the repository variable VITE_API_BASE_URL to switch the deployed app to the backend.
+          VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
 
       - name: Create route entry pages
         run: |

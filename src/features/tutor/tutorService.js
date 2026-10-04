@@ -1,38 +1,29 @@
+import { ApiError, apiEnabled, apiRequest } from '../../lib/apiClient'
 import { tutorInstructions } from './tutorPrompt'
 
 // Backend contract: POST {VITE_API_BASE_URL}/tutor/messages
 //   body:     { exam, context, instructions, messages: [{ role: 'user' | 'assistant', content }] }
 //   response: { text }
-// The model API key lives on the backend only. Without VITE_API_BASE_URL a scripted local tutor runs so the screen works in development.
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
-
+// The model API key lives on the backend only. The request is authenticated by the shared API client. Without VITE_API_BASE_URL a scripted local tutor runs so the screen works in development.
 export class TutorServiceError extends Error {
   constructor(kind, message) {
     super(message)
-    this.kind = kind // 'rate_limit' | 'network'
+    this.kind = kind // 'rate_limit' | 'unauthorized' | 'network'
   }
 }
 
 export async function requestTutorReply({ exam, context, messages }) {
-  const text = apiBaseUrl ? await fetchReply({ exam, context, messages }) : await localReply({ context })
+  const text = apiEnabled ? await fetchReply({ exam, context, messages }) : await localReply({ context })
   return { text: text.trim() }
 }
 
 async function fetchReply({ exam, context, messages }) {
-  let response
+  let data
   try {
-    response = await fetch(`${apiBaseUrl}/tutor/messages`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ exam, context, instructions: tutorInstructions(exam, context), messages }),
-    })
-  } catch {
-    throw new TutorServiceError('network', 'Network request failed')
+    data = await apiRequest('/tutor/messages', { method: 'POST', body: { exam, context, instructions: tutorInstructions(exam, context), messages } })
+  } catch (error) {
+    throw new TutorServiceError(error instanceof ApiError ? error.kind : 'network', error.message)
   }
-  if (response.status === 429) throw new TutorServiceError('rate_limit', 'Rate limited')
-  if (!response.ok) throw new TutorServiceError('network', `Tutor request failed with ${response.status}`)
-  const data = await response.json()
   if (typeof data?.text !== 'string') throw new TutorServiceError('network', 'Malformed tutor response')
   return data.text
 }

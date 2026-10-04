@@ -10,4 +10,5 @@ export const tutorSuggestions = {
 export const tutorErrorCopy = {
   network: 'The tutor could not reply. Check your connection and try again.',
   rate_limit: 'The tutor is getting a lot of requests right now. Wait a minute and try again.',
+  unauthorized: 'Your session has expired. Sign in again to keep talking to the tutor.',
 }
