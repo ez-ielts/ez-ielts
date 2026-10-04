@@ -42,7 +42,7 @@ jobs:
 
       - name: Create route entry pages
         run: |
-          for route in interview sso-callback today plan homework tutor pricing settings; do
+          for route in placement interview sso-callback today plan homework tutor pricing settings; do
             mkdir -p "dist/$route"
             cp dist/index.html "dist/$route/index.html"
           done

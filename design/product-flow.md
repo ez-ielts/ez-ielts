@@ -28,7 +28,9 @@ A learner should move from an unknown starting level to a personalized, exam-foc
 - Capture transcript, pronunciation signals, fluency, grammar range/accuracy, and vocabulary evidence.
 - Provide recording, pause, retry, and network-error states in the production version.
 
-### 3. Skill diagnosis
+### 3. Placement and skill diagnosis
+
+- A short timed placement ([placement](placement.md)) covers Listening, Reading, Writing and Speaking and gives the start estimate per skill and overall. The learner can adjust it by one half-band before the course starts.
 
 - Assess all four skills: Listening, Reading, Speaking, and Writing.
 - Show overall estimate plus evidence and focus areas for each skill.

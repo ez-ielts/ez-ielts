@@ -27,15 +27,18 @@ const lengthBands = {
 
 export const wordCount = (text) => text.trim().split(/\s+/).filter(Boolean).length
 
-export function bandFromLength(exam, skill, words) {
-  return lengthBands[exam][skill].find(([min]) => words >= min)[1]
+// `scale` stretches the thresholds for shorter tasks (a task a third as long expects a third of the words).
+export function bandFromLength(exam, skill, words, scale = 1) {
+  return lengthBands[exam][skill].find(([min]) => words >= min * scale)[1]
 }
 
 const correctCount = (questions, chosen) => questions.filter((question) => chosen[question.id] === question.options[question.answer]).length
 
-export async function scoreMock({ exam, answers }) {
-  const content = mockContent[exam]
-  const cap = skillBandCap[exam]
+// `content` defaults to the checkpoint mock; the placement passes its own shorter content (and a lower `cap`).
+export async function scoreMock({ exam, answers, content = mockContent[exam], cap = skillBandCap[exam] }) {
+  const reference = mockContent[exam]
+  const writingScale = content.writing.targetWords / reference.writing.targetWords
+  const speakingScale = content.speaking.speakSeconds / reference.speaking.speakSeconds
   const listeningRaw = correctCount(content.listening.questions, answers.listening)
   const readingRaw = correctCount(content.reading.questions, answers.reading)
   const writingWords = wordCount(answers.writing)
@@ -44,8 +47,8 @@ export async function scoreMock({ exam, answers }) {
   const skills = [
     { key: 'listening', name: 'Listening', band: Math.min(cap, bandFromRaw(exam, 'listening', listeningRaw, content.listening.questions.length)), evidence: `${listeningRaw} of ${content.listening.questions.length} correct.` },
     { key: 'reading', name: 'Reading', band: Math.min(cap, bandFromRaw(exam, 'reading', readingRaw, content.reading.questions.length)), evidence: `${readingRaw} of ${content.reading.questions.length} correct.` },
-    { key: 'writing', name: 'Writing', band: bandFromLength(exam, 'writing', writingWords), evidence: `${writingWords} words (this short version asks for ${content.writing.targetWords}). Placeholder marking from length only.` },
-    { key: 'speaking', name: 'Speaking', band: bandFromLength(exam, 'speaking', speakingWords), evidence: `${speakingWords} words in ${answers.speaking.seconds} seconds. Placeholder marking from length only.` },
+    { key: 'writing', name: 'Writing', band: bandFromLength(exam, 'writing', writingWords, writingScale), evidence: `${writingWords} words (this short version asks for ${content.writing.targetWords}). Placeholder marking from length only.` },
+    { key: 'speaking', name: 'Speaking', band: bandFromLength(exam, 'speaking', speakingWords, speakingScale), evidence: `${speakingWords} words in ${answers.speaking.seconds} seconds. Placeholder marking from length only.` },
   ]
   return { overall: overallBand(skills.map((skill) => skill.band)), skills, cap }
 }

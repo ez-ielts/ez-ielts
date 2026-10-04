@@ -15,7 +15,7 @@ function SignedInPanel() {
   return (
     <div className="flex flex-col gap-4 border-2 border-ink p-4">
       <p className="m-0 text-sm">Signed in as <strong>{isLoaded ? who : '…'}</strong>.</p>
-      <Button variant="primary" size="xl" arrow onClick={() => navigate('/interview')}>Continue to your questionnaire</Button>
+      <Button variant="primary" size="xl" arrow onClick={() => navigate('/placement')}>Continue to placement</Button>
       <div className="flex flex-wrap gap-x-4">
         <Link to="/today" className="inline-flex min-h-11 items-center text-sm font-bold text-accent-700">Go to Today</Link>
         <Button variant="ghost" onClick={() => signOut({ redirectUrl: '/' })}>Sign out</Button>

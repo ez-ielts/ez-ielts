@@ -8,13 +8,16 @@ import { choiceMade, finishSection, finishSpeaking, mockReset, mockStarted, subm
 import { AlertBand } from '../ui/AlertBand'
 import { Button } from '../ui/Button'
 import { Kicker } from '../ui/Kicker'
-import { ListeningSection } from './ListeningSection'
-import { MockIntro } from './MockIntro'
+import { AssessmentIntro } from './AssessmentIntro'
+import { AssessmentSection } from './AssessmentSection'
 import { MockResult } from './MockResult'
-import { ReadingSection } from './ReadingSection'
 import { SectionShell } from './SectionShell'
-import { SpeakingSection } from './SpeakingSection'
-import { WritingSection } from './WritingSection'
+
+const mockRules = [
+  'Each section is timed and cannot be revisited once you move on.',
+  'Timings and length are shortened in this version.',
+  'The result is an estimate, not an official score.',
+]
 
 const page = 'mx-auto flex w-full max-w-[860px] flex-col gap-6 px-[clamp(16px,4vw,40px)] py-8'
 
@@ -31,18 +34,30 @@ function MockSession({ id, week }) {
 
   useEffect(() => { dispatch(mockReset()) }, [dispatch, id])
 
-  const choose = (key) => (questionId, value) => dispatch(choiceMade({ section: key, id: questionId, value }))
+  const handlers = {
+    onChoose: (key) => (questionId, value) => dispatch(choiceMade({ section: key, id: questionId, value })),
+    onWriting: (text) => dispatch(writingChanged(text)),
+    onSpeaking: (answer) => dispatch(finishSpeaking(answer)),
+  }
 
   return (
     <main className={page}>
-      {stage === 'intro' && <MockIntro week={week} speakingSeconds={content.speaking.speakSeconds} onStart={() => dispatch(mockStarted(id))} />}
+      {stage === 'intro' && (
+        <AssessmentIntro
+          kicker={`Checkpoint · week ${week}`}
+          title="Checkpoint mock"
+          lede="Four sections, one per skill. Your result sets how your plan adjusts."
+          sections={mockSections}
+          speakingSeconds={content.speaking.speakSeconds}
+          rules={mockRules}
+          startLabel="Start the mock"
+          onStart={() => dispatch(mockStarted(id))}
+        />
+      )}
 
       {stage === 'section' && (
         <SectionShell key={mock.sectionIndex} section={section} index={mock.sectionIndex} total={mockSections.length} onFinish={() => dispatch(finishSection())}>
-          {section.key === 'listening' && <ListeningSection content={content.listening} chosen={mock.answers.listening} onChoose={choose('listening')} />}
-          {section.key === 'reading' && <ReadingSection content={content.reading} chosen={mock.answers.reading} onChoose={choose('reading')} />}
-          {section.key === 'writing' && <WritingSection content={content.writing} text={mock.answers.writing} onChange={(text) => dispatch(writingChanged(text))} />}
-          {section.key === 'speaking' && <SpeakingSection turn={content.speaking} lang={content.speakingLang} onFinish={(answer) => dispatch(finishSpeaking(answer))} />}
+          <AssessmentSection sectionKey={section.key} content={content} answers={mock.answers} handlers={handlers} />
         </SectionShell>
       )}
 

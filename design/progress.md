@@ -30,7 +30,7 @@ Progress is state, not decoration. These rules decide when a day counts, when a 
 - **Reached the target**: "Course complete". Text: "You reached {overall}[, past the {target} target]. Your next course ({new start} → {new target}) starts from this result." Primary **Start next course**.
 - **Below the target**: "Your final mock is {overall}, below the {target} target. If you completed the assigned work, the guarantee extends your course free until it is reached." Primary **Retake the final mock**. Extension length is a backend rule; nothing is invented here.
 - **Start next course** sets the start estimate to the confirmed result (`intake.start[exam]`), restarts the plan at week 1 with no checkpoints, adjustments or completion, and resets Today's session. The course name, target, pricing level and roadmap all derive from the new start. The goal is kept when it is still ahead, otherwise it follows the new target.
-- The start estimate is state (`intake.start`) rather than a config constant; the placement test will set it the first time.
+- The start estimate is state (`intake.start`) rather than a config constant. The [placement](placement.md) test sets it the first time and, like the next course, restarts progress at week 1 (`beginCourseAt`).
 
 ## Acceptance
 
