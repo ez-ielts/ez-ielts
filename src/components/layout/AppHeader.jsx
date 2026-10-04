@@ -1,6 +1,8 @@
 import { User } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { appTabs } from '../../lib/navigation'
+import { authEnabled } from '../../features/auth/authConfig'
+import { AuthControls } from '../auth/AuthControls'
 import { Button } from '../ui/Button'
 import { BrandMark } from './Brand'
 
@@ -29,9 +31,11 @@ export function AppHeader({ activeTab, examLabel, weekLabel, showUpgrade, onExam
       <span className="ml-auto flex items-center gap-3">
         <button type="button" onClick={onExamTag} className="border border-accent bg-transparent px-2.5 py-[3px] text-[11px] tracking-[.02em] whitespace-nowrap text-accent-700"><span className="max-[419px]:sr-only">{examLabel} · </span>{weekLabel}</button>
         {showUpgrade && <Button variant="primary" size="xs" onClick={onUpgrade}>Upgrade</Button>}
-        <button type="button" onClick={onProfile} aria-label="Profile and settings" className="grid size-10 place-items-center border border-ink/40 bg-transparent text-ink hover:bg-ink/7">
-          <User size={16} aria-hidden="true" />
-        </button>
+        {authEnabled ? <AuthControls /> : (
+          <button type="button" onClick={onProfile} aria-label="Profile and settings" className="grid size-10 place-items-center border border-ink/40 bg-transparent text-ink hover:bg-ink/7">
+            <User size={16} aria-hidden="true" />
+          </button>
+        )}
       </span>
     </header>
   )

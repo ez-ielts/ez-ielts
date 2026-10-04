@@ -1,4 +1,5 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
+import { RequireAuth } from './components/auth/RequireAuth'
 import { InterviewScreen } from './components/interview/InterviewScreen'
 import { JourneyFlow } from './components/journey/JourneyFlow'
 import { JourneySidebar } from './components/journey/JourneySidebar'
@@ -35,16 +36,18 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<JourneyLayout />} />
-      <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
-      <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><ScreenPlaceholder title="Speaking practice" /></FocusLayout>} />
-      <Route element={<AppLayout />}>
-        <Route path="/today" element={<TodayScreen />} />
-        <Route path="/plan" element={<ScreenPlaceholder title="Plan" />} />
-        <Route path="/homework" element={<ScreenPlaceholder title="Homework" />} />
-        <Route path="/homework/:id" element={<ScreenPlaceholder title="Marked essay" />} />
-        <Route path="/tutor" element={<ScreenPlaceholder title="Tutor" />} />
-        <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
-        <Route path="/settings" element={<ScreenPlaceholder title="Settings" />} />
+      <Route element={<RequireAuth />}>
+        <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
+        <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><ScreenPlaceholder title="Speaking practice" /></FocusLayout>} />
+        <Route element={<AppLayout />}>
+          <Route path="/today" element={<TodayScreen />} />
+          <Route path="/plan" element={<ScreenPlaceholder title="Plan" />} />
+          <Route path="/homework" element={<ScreenPlaceholder title="Homework" />} />
+          <Route path="/homework/:id" element={<ScreenPlaceholder title="Marked essay" />} />
+          <Route path="/tutor" element={<ScreenPlaceholder title="Tutor" />} />
+          <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
+          <Route path="/settings" element={<ScreenPlaceholder title="Settings" />} />
+        </Route>
       </Route>
     </Routes>
   )
