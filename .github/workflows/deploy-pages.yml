@@ -40,10 +40,12 @@ jobs:
 
       - name: Create route entry pages
         run: |
-          for route in interview today pricing; do
+          for route in interview today plan homework tutor pricing settings; do
             mkdir -p "dist/$route"
             cp dist/index.html "dist/$route/index.html"
           done
+          # Dynamic routes (/homework/:id, /speaking/:id) fall back to the SPA through 404.html.
+          cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

@@ -4,11 +4,12 @@ const variants = {
   ghost: 'px-1 text-accent-700 hover:bg-accent/10 active:bg-accent/18',
 }
 
-const sizes = { sm: 'min-h-10', md: 'min-h-11', lg: 'min-h-12', xl: 'min-h-[52px]' }
+const sizes = { xs: 'min-h-9', sm: 'min-h-10', md: 'min-h-11', lg: 'min-h-12', xl: 'min-h-[52px]' }
 
 // Labels sit flush left; a button wider than its label pushes the trailing arrow to the right edge.
-export function Button({ variant = 'secondary', size = 'md', arrow = false, type = 'button', className = '', children, ...props }) {
-  const layout = arrow ? 'justify-between' : 'justify-center'
+// `block` makes a full-width button with its label flush left.
+export function Button({ variant = 'secondary', size = 'md', arrow = false, block = false, type = 'button', className = '', children, ...props }) {
+  const layout = arrow ? 'justify-between' : block ? 'w-full justify-start' : 'justify-center'
   return (
     <button
       type={type}

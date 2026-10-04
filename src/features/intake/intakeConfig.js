@@ -1,7 +1,9 @@
+import { examLabels } from '../session/sessionSlice'
+
 // Course-intake data per exam. `start` is the placement estimate until the placement slice supplies a real one.
 export const intakeExams = {
   ielts: {
-    label: 'IELTS Academic',
+    label: examLabels.ielts,
     start: '5.5',
     targets: ['6.0', '6.5', '7.0'],
     course: 'Core 5.5 → 6.5',
@@ -17,7 +19,7 @@ export const intakeExams = {
     ],
   },
   toefl: {
-    label: 'TOEFL iBT',
+    label: examLabels.toefl,
     start: '3.5',
     targets: ['4.0', '4.5', '5.0'],
     course: 'Core 3.5 → 4.5',

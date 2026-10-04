@@ -21,7 +21,7 @@ export function InterviewScreen() {
   const buildCourse = () => dispatch(stageChanged('course'))
 
   return (
-    <div className="flex flex-col gap-6 px-[clamp(16px,4vw,40px)] py-6">
+    <main className="flex flex-col gap-6 px-[clamp(16px,4vw,40px)] py-6">
       <StageStrip stages={intakeStages} current={stageIndex[intake.stage]} />
 
       {intake.stage === 'questionnaire' && (
@@ -71,6 +71,6 @@ export function InterviewScreen() {
           onSeePricing={() => navigate('/pricing')}
         />
       )}
-    </div>
+    </main>
   )
 }
