@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&display=swap');
+/* Clerk's styles sit in their own layer below Tailwind's components and utilities, so tokens and utilities override them. */
+@layer theme, base, clerk, components, utilities;
 @import 'tailwindcss';
 
 /* Modernist tokens. Source: design/design-system.md. Ground, ink and one red accent; 0 radius everywhere. */

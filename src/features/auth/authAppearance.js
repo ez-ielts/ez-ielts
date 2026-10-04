@@ -1,17 +1,42 @@
-// Clerk theme mapped onto the Modernist tokens (design/design-system.md): accent fill, ink text, no radius, no shadow.
+const outlineButton = 'min-h-11 rounded-none border-2 border-ink bg-ground text-ink shadow-none hover:bg-ink/7'
+
+// Clerk theme mapped onto the Modernist tokens (design/design-system.md): accent fill, ink rules, surface inputs,
+// no radius, no shadow. Clerk's styles are in the `clerk` CSS layer (see index.css), so these utilities win.
 export const clerkAppearance = {
+  cssLayerName: 'clerk',
   variables: {
     colorPrimary: '#ec3013',
+    colorTextOnPrimaryBackground: '#f3f2f2',
     colorBackground: '#f3f2f2',
     colorInputBackground: '#eae9e9',
+    colorInputText: '#201e1d',
     colorText: '#201e1d',
     colorTextSecondary: '#444141',
+    colorNeutral: '#201e1d',
+    colorDanger: '#ae1800',
     borderRadius: '0',
     fontFamily: 'Archivo, system-ui, sans-serif',
   },
   elements: {
     rootBox: 'w-full',
-    cardBox: 'w-full shadow-none',
-    card: 'w-full border-2 border-ink shadow-none',
+    cardBox: 'w-full rounded-none border-0 bg-transparent shadow-none',
+    card: 'w-full gap-6 rounded-none border-2 border-ink bg-ground p-4 shadow-none',
+    headerTitle: 'text-[17px] font-extrabold tracking-[-.01em] text-ink',
+    headerSubtitle: 'text-[12.5px] text-neutral-800',
+    socialButtonsBlockButton: outlineButton,
+    socialButtonsBlockButtonText: 'text-sm font-bold',
+    alternativeMethodsBlockButton: outlineButton,
+    dividerLine: 'bg-ink/40',
+    dividerText: 'text-[11px] font-bold tracking-[.12em] text-neutral-800 uppercase',
+    formFieldLabel: 'text-[13px] font-bold text-ink',
+    formFieldInput: 'min-h-11 rounded-none border border-ink/40 bg-surface text-sm shadow-none focus:border-accent',
+    formFieldInputShowPasswordButton: 'rounded-none',
+    otpCodeFieldInput: 'rounded-none border-2 border-ink bg-surface shadow-none',
+    formButtonPrimary: 'min-h-12 rounded-none bg-accent text-sm font-extrabold normal-case shadow-none hover:bg-accent-600',
+    formResendCodeLink: 'font-bold text-accent-700',
+    identityPreview: 'rounded-none border border-ink/40 shadow-none',
+    footer: 'rounded-none bg-transparent shadow-none',
+    footerAction: 'hidden',
+    footerActionLink: 'font-bold text-accent-700',
   },
 }

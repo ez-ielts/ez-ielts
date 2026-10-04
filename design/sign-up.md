@@ -17,6 +17,18 @@ Two wrapping columns inside the standard content width (`px-[clamp(16px,4vw,40px
 - Auth loading (Clerk script not ready): a "Loading…" status line.
 - No `VITE_CLERK_PUBLISHABLE_KEY` (development only): `AlertBand` "Sign-in is not configured", with a Continue link to `/interview`.
 
+## Clerk theme
+
+`src/features/auth/authAppearance.js` maps the tokens onto Clerk's `variables` and per-element classes. Clerk's styles are put in a `clerk` CSS layer (`@layer theme, base, clerk, components, utilities` in `index.css`, `cssLayerName: 'clerk'`), so Tailwind utilities override them without `!important`.
+
+- Card: 2px ink border, ground fill, no radius, no shadow.
+- Title 17px / 800; subtitle 12.5px neutral-800.
+- Social and alternative-method buttons: 44px, 2px ink border, ground fill, bold label.
+- Inputs: surface fill, hairline ink/40 border, accent border on focus, 44px; OTP boxes 2px ink.
+- Primary button: accent fill, ground text, 48px, 800 weight.
+- Links: accent-700, bold. Clerk's own "have an account?" footer link is hidden; our toggle below the card switches sign-up and sign-in.
+- "Secured by Clerk" branding stays (it cannot be removed on the free plan).
+
 ## Behaviour
 
 - Google/Apple return to `/` (hash routing) or `/sso-callback`, then the signed-in panel appears.

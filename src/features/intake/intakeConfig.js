@@ -38,6 +38,8 @@ export const intakeExams = {
 
 export const checkpointWeeks = [4, 8]
 
+export const courseWeeks = (exam) => intakeExams[exam].weeks.map(([title, focus], index) => ({ title, focus, checkpoint: checkpointWeeks.includes(index + 1) }))
+
 export const intakeStages = ['Questionnaire', 'Tutor interview', 'Your course']
 
 export const skills = ['Listening', 'Reading', 'Writing', 'Speaking']
