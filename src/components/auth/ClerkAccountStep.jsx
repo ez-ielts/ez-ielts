@@ -18,7 +18,7 @@ export function ClerkAccountStep() {
       <h2 className="m-0 mb-[18px] font-serif text-[45px] leading-[.96] tracking-[-1.9px] sm:text-[55px]">Let’s build your<br /><em className="text-[#527b61]">starting point.</em></h2>
       <p className="mb-6 max-w-[430px] text-xs leading-[1.65] text-[#7f867f]">Create your free account. We’ll save your assessment, course progress, and exam readiness in one place.</p>
       <SignedOut>
-        <Form routing="virtual" />
+        <Form routing="hash" />
         <Button variant="ghost" size="md" className="mt-3" onClick={() => setMode(signingUp ? 'sign-in' : 'sign-up')}>
           {signingUp ? 'Already have an account? Sign in' : 'New here? Create an account'}
         </Button>
