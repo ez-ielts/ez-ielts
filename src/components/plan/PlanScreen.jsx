@@ -43,8 +43,21 @@ export function PlanScreen() {
       </dl>
 
       <Section id="plan-weeks" title="Course weeks">
-        <WeekList weeks={plan.weeks} currentWeek={plan.currentWeek} checkpointTo={(week) => `/mock/week-${week}`} />
+        <WeekList weeks={plan.weeks} currentWeek={plan.currentWeek} checkpointTo={(week) => `/mock/week-${week}`} checkpointResults={plan.checkpoints} />
       </Section>
+
+      {plan.adjustments.length > 0 && (
+        <Section id="plan-adjustments" title="Plan adjustments">
+          <dl className="m-0 grid gap-[2px] border-2 border-ink bg-ink">
+            {plan.adjustments.map((adjustment) => (
+              <div key={adjustment.id} className="bg-ground p-4">
+                <dt className="text-[15px] font-bold">{adjustment.title}</dt>
+                <dd className="m-0 mt-0.5 text-[12.5px] text-neutral-800">{adjustment.detail}</dd>
+              </div>
+            ))}
+          </dl>
+        </Section>
+      )}
 
       <div className="flex flex-wrap gap-x-8 gap-y-8">
         <div className="min-w-0 flex-[1_1_380px]">

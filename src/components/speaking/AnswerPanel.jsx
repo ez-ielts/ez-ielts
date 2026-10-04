@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { speakingErrorCopy } from '../../features/speaking/speakingConfig'
-import { useCountdown } from '../../features/speaking/useCountdown'
+import { useCountdown } from '../../lib/useCountdown'
 import { useVoiceAnswer } from '../../features/speaking/useVoiceAnswer'
 import { AlertBand } from '../ui/AlertBand'
 import { Button } from '../ui/Button'

@@ -1,4 +1,4 @@
-import { formatClock } from '../../features/speaking/useCountdown'
+import { formatClock } from '../../lib/useCountdown'
 
 export function SpeakingTimer({ seconds, label }) {
   return (

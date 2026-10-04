@@ -19,6 +19,7 @@ This directory is the source of truth for product design before implementation.
 - [Homework and marked work](homework.md): `/homework`, `/homework/:id`, grouped list and annotated marked essay.
 - [Tutor](tutor.md): `/tutor`, exam-scoped tutor chat with course context.
 - [Pricing and Settings](pricing-settings.md): `/pricing`, `/settings`, course levels, account, exam, schedule and reminders.
+- [Checkpoint mock exam](mock-exam.md): `/mock/:id`, four timed sections, band calculation and plan adjustments.
 - [Interview → course](interview-course.md): post-placement questionnaire, tutor interview and generated 8-week course.
 - [App shell and Today](today.md): study-tab navigation (desktop tabs, mobile bottom bar) and the daily session screen.
 - [Voice examiner](voice-examiner.md): agent instructions, tool sequence, evidence policy, and finalization rules.

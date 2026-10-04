@@ -1,0 +1,77 @@
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useHomework } from '../../features/homework/useHomework'
+import { checkpointIds, mockContent, mockSections } from '../../features/mock/mockConfig'
+import { choiceMade, finishSection, finishSpeaking, mockReset, mockStarted, submitMock, writingChanged } from '../../features/mock/mockSlice'
+import { AlertBand } from '../ui/AlertBand'
+import { Button } from '../ui/Button'
+import { Kicker } from '../ui/Kicker'
+import { ListeningSection } from './ListeningSection'
+import { MockIntro } from './MockIntro'
+import { MockResult } from './MockResult'
+import { ReadingSection } from './ReadingSection'
+import { SectionShell } from './SectionShell'
+import { SpeakingSection } from './SpeakingSection'
+import { WritingSection } from './WritingSection'
+
+const page = 'mx-auto flex w-full max-w-[860px] flex-col gap-6 px-[clamp(16px,4vw,40px)] py-8'
+
+function MockSession({ id, week }) {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const exam = useSelector((state) => state.session.exam)
+  const mock = useSelector((state) => state.mock)
+  const content = mockContent[exam]
+  const active = mock.mockId === id
+  const stage = active ? mock.stage : 'intro'
+  const section = mockSections[mock.sectionIndex]
+  useHomework()
+
+  useEffect(() => { dispatch(mockReset()) }, [dispatch, id])
+
+  const choose = (key) => (questionId, value) => dispatch(choiceMade({ section: key, id: questionId, value }))
+
+  return (
+    <main className={page}>
+      {stage === 'intro' && <MockIntro week={week} speakingSeconds={content.speaking.speakSeconds} onStart={() => dispatch(mockStarted(id))} />}
+
+      {stage === 'section' && (
+        <SectionShell key={mock.sectionIndex} section={section} index={mock.sectionIndex} total={mockSections.length} onFinish={() => dispatch(finishSection())}>
+          {section.key === 'listening' && <ListeningSection content={content.listening} chosen={mock.answers.listening} onChoose={choose('listening')} />}
+          {section.key === 'reading' && <ReadingSection content={content.reading} chosen={mock.answers.reading} onChoose={choose('reading')} />}
+          {section.key === 'writing' && <WritingSection content={content.writing} text={mock.answers.writing} onChange={(text) => dispatch(writingChanged(text))} />}
+          {section.key === 'speaking' && <SpeakingSection turn={content.speaking} lang={content.speakingLang} onFinish={(answer) => dispatch(finishSpeaking(answer))} />}
+        </SectionShell>
+      )}
+
+      {stage === 'scoring' && <p role="status" className="m-0 text-sm text-neutral-800">Marking your mock…</p>}
+
+      {stage === 'failed' && (
+        <>
+          <Kicker tone="accent">Checkpoint · week {week}</Kicker>
+          <AlertBand kicker="Couldn't mark your mock" action={<Button variant="primary" onClick={() => dispatch(submitMock())}>Try again</Button>}>Your answers are kept. Check your connection and try again.</AlertBand>
+        </>
+      )}
+
+      {stage === 'result' && <MockResult result={mock.result} exam={exam} onPlan={() => navigate('/plan')} onToday={() => navigate('/today')} />}
+    </main>
+  )
+}
+
+export function MockScreen() {
+  const { id } = useParams()
+  const week = checkpointIds[id]
+
+  if (!week) {
+    return (
+      <main className={page}>
+        <Kicker tone="accent">Checkpoint mock</Kicker>
+        <h1 className="m-0 text-[clamp(26px,4vw,40px)] leading-[1.05] font-extrabold tracking-[-.025em]">Mock not found</h1>
+        <p className="m-0 text-neutral-800">That is not a checkpoint of your course.</p>
+        <Link to="/plan" className="inline-flex min-h-11 items-center self-start font-bold text-accent-700 underline underline-offset-[3px]">Back to your plan</Link>
+      </main>
+    )
+  }
+  return <MockSession key={id} id={id} week={week} />
+}
