@@ -6,9 +6,9 @@ import { MarkedEssay } from './components/homework/MarkedEssay'
 import { InterviewScreen } from './components/interview/InterviewScreen'
 import { AppLayout } from './components/layout/AppLayout'
 import { FocusHeader } from './components/layout/FocusHeader'
-import { ScreenPlaceholder } from './components/layout/ScreenPlaceholder'
 import { WelcomeScreen } from './components/onboarding/WelcomeScreen'
 import { PlanScreen } from './components/plan/PlanScreen'
+import { MockScreen } from './components/mock/MockScreen'
 import { PricingScreen } from './components/pricing/PricingScreen'
 import { SettingsScreen } from './components/settings/SettingsScreen'
 import { SpeakingScreen } from './components/speaking/SpeakingScreen'
@@ -35,7 +35,7 @@ function App() {
       <Route element={<RequireAuth />}>
         <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
         <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><SpeakingScreen /></FocusLayout>} />
-        <Route path="/mock/:id" element={<FocusLayout label="Checkpoint mock" exitTo="/plan"><ScreenPlaceholder title="Checkpoint mock" /></FocusLayout>} />
+        <Route path="/mock/:id" element={<FocusLayout label="Checkpoint mock" exitTo="/plan"><MockScreen /></FocusLayout>} />
         <Route element={<AppLayout />}>
           <Route path="/today" element={<TodayScreen />} />
           <Route path="/plan" element={<PlanScreen />} />

@@ -1,6 +1,6 @@
 # Plan
 
-Route: `/plan` (study tab "Plan"). Also opened by the exam tag in the header and by Today → Reschedule. Checkpoint mocks open `/mock/:id` (focus mode, exits to Plan; built in its own issue).
+Route: `/plan` (study tab "Plan"). Also opened by the exam tag in the header and by Today → Reschedule. Checkpoint mocks open `/mock/:id` (see [mock exam](mock-exam.md)).
 
 ## Layout
 
@@ -17,7 +17,7 @@ Layout wraps: week list and schedule sit side by side above ~860px and stack bel
 
 - `plan` slice: `currentWeek` and `totalWeeks` (placeholder `3` of `8` until progress is tracked from completed sessions). `selectPlan` derives the whole view from `session.exam`, the intake answers and the exam's week table, so there is one source for the schedule: the intake answers.
 - Rescheduling dispatches `intake/answerChosen`. The target is not editable here; it comes from the intake and never exceeds the exam's allowed targets.
-- Checkpoint adjustments (from mock results and missed work) will extend this slice in the mock exam and homework issues.
+- `checkpoints[week]` and `adjustments` are set when a mock is completed. The Plan screen shows a "Plan adjustments" section (title and detail per adjustment, or "Plan unchanged") and the mock result on the checkpoint week.
 
 ## Acceptance
 

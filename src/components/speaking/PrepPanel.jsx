@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCountdown } from '../../features/speaking/useCountdown'
+import { useCountdown } from '../../lib/useCountdown'
 import { Button } from '../ui/Button'
 import { SpeakingTimer } from './SpeakingTimer'
 
