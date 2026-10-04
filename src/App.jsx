@@ -6,6 +6,8 @@ import { InterviewScreen } from './components/interview/InterviewScreen'
 import { AppLayout } from './components/layout/AppLayout'
 import { FocusHeader } from './components/layout/FocusHeader'
 import { ScreenPlaceholder } from './components/layout/ScreenPlaceholder'
+import { HomeworkScreen } from './components/homework/HomeworkScreen'
+import { MarkedEssay } from './components/homework/MarkedEssay'
 import { PlanScreen } from './components/plan/PlanScreen'
 import { WelcomeScreen } from './components/onboarding/WelcomeScreen'
 import { TodayScreen } from './components/today/TodayScreen'
@@ -33,8 +35,8 @@ function App() {
         <Route element={<AppLayout />}>
           <Route path="/today" element={<TodayScreen />} />
           <Route path="/plan" element={<PlanScreen />} />
-          <Route path="/homework" element={<ScreenPlaceholder title="Homework" />} />
-          <Route path="/homework/:id" element={<ScreenPlaceholder title="Marked essay" />} />
+          <Route path="/homework" element={<HomeworkScreen />} />
+          <Route path="/homework/:id" element={<MarkedEssay />} />
           <Route path="/tutor" element={<ScreenPlaceholder title="Tutor" />} />
           <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
           <Route path="/settings" element={<ScreenPlaceholder title="Settings" />} />

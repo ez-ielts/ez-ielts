@@ -10,7 +10,6 @@ export const todayContent = {
       { title: 'Lesson · describe the shape before the numbers', sub: 'Band 5 and band 7 answers to the same chart, compared line by line', minutes: '15 min' },
       { title: 'Guided practice · write the overview sentence', sub: 'Bar chart, three series. Checked as you type, then marked.', minutes: '20 min' },
     ],
-    overdue: 'Task 1 chart summary from Friday, 150 words. A second late submission voids the band guarantee.',
     marked: [
       { kicker: 'Writing task 2', title: 'Ageing populations', body: 'Band 5.5. Two body paragraphs open without a claim; nine article errors.', cta: 'Open marked essay', to: '/homework/ageing-populations' },
       { kicker: 'Speaking part 2', title: 'A skill you learned', body: 'Band 5.0. Ran 72 seconds with four pauses over three seconds.', cta: 'Record take 2', to: '/speaking/part-2' },
@@ -41,7 +40,6 @@ export const todayContent = {
       { title: 'Lesson · cover all three bullet points', sub: 'A 3.0 and a 5.0 email to the same prompt, compared', minutes: '15 min' },
       { title: 'Guided practice · email to a professor', sub: 'Request an extension. Checked as you type, then marked.', minutes: '20 min' },
     ],
-    overdue: 'Academic Discussion post from Friday, 100 words. A second late submission voids the score guarantee.',
     marked: [
       { kicker: 'Academic Discussion', title: 'Remote lectures', body: 'Score 3.5. Position stated but only one supporting reason; six verb-form errors.', cta: 'Open marked response', to: '/homework/remote-lectures' },
       { kicker: 'Take an Interview', title: 'Study habits', body: 'Score 3.0. Two answers ended before 30 seconds.', cta: 'Record take 2', to: '/speaking/interview' },

@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import { selectOverdueItem } from '../../features/homework/homeworkSlice'
+import { useHomework } from '../../features/homework/useHomework'
 import { measuredWeeks, todayContent } from '../../features/today/todayConfig'
 import { SESSION_STEPS, sessionAdvanced, stepCompleted } from '../../features/today/todaySlice'
 import { AlertBand } from '../ui/AlertBand'
@@ -19,6 +21,8 @@ export function TodayScreen() {
   const navigate = useNavigate()
   const exam = useSelector((state) => state.session.exam)
   const stepsDone = useSelector((state) => state.today.stepsDone)
+  useHomework()
+  const overdue = useSelector(selectOverdueItem)
   const content = todayContent[exam]
   const labels = sessionLabels(stepsDone)
 
@@ -43,9 +47,11 @@ export function TodayScreen() {
             <span aria-live="polite" className="text-xs text-neutral-800">{labels.progress}</span>
           </div>
           <SessionSteps steps={content.steps} stepsDone={stepsDone} onCompleteStep={(index) => dispatch(stepCompleted(index))} />
-          <AlertBand alert={false} kicker="Overdue" action={<Button variant="primary" onClick={() => navigate('/homework')}>Open assignment</Button>}>
-            {content.overdue}
-          </AlertBand>
+          {overdue && (
+            <AlertBand alert={false} kicker="Overdue" action={<Button variant="primary" onClick={() => navigate('/homework')}>Open assignment</Button>}>
+              {overdue.task} {overdue.title.toLowerCase()} from {overdue.due}. {overdue.lateNote}
+            </AlertBand>
+          )}
         </section>
 
         <section aria-labelledby="today-marked" className="flex flex-col gap-4">
