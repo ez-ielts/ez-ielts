@@ -13,9 +13,10 @@ export function ScheduleEditor() {
 
   return (
     <div className="flex flex-col gap-6">
-      {scheduleQuestions.map((question) => (
+      {scheduleQuestions.map((question, index) => (
         <ChoiceQuestion
           key={question.key}
+          ruled={index > 0}
           label={question.label}
           options={question.options}
           value={profile[question.key]}

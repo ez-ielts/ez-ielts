@@ -1,9 +1,9 @@
 import { ChoiceButton } from './ChoiceButton'
 
-// A question with a ruled top edge and a row of choices. `number` prefixes the legend (questionnaire only).
-export function ChoiceQuestion({ label, options, value, hint, number, onChoose }) {
+// A question with a ruled top edge (`ruled`, on by default) and a row of choices. `number` prefixes the legend (questionnaire only).
+export function ChoiceQuestion({ label, options, value, hint, number, ruled = true, onChoose }) {
   return (
-    <fieldset className="m-0 flex min-w-0 flex-col gap-2 border-0 border-t-2 border-ink p-0 pt-3">
+    <fieldset className={`m-0 flex min-w-0 flex-col gap-2 border-0 p-0 ${ruled ? 'border-t-2 border-ink pt-3' : ''}`}>
       <legend className="float-left mb-2 w-full p-0 text-[15px] font-bold">{number && <span className="mr-2 text-accent-700">{number}</span>}{label}</legend>
       <div className="flex flex-wrap gap-2">
         {options.map((option) => (

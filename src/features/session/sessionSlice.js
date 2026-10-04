@@ -13,8 +13,9 @@ const sessionSlice = createSlice({
   reducers: {
     setExam: (state, action) => { state.exam = action.payload },
     startTrial: (state) => { state.tier = 'trial' },
+    chooseTier: (state, action) => { state.tier = action.payload },
   },
 })
 
-export const { setExam, startTrial } = sessionSlice.actions
+export const { setExam, startTrial, chooseTier } = sessionSlice.actions
 export default sessionSlice.reducer

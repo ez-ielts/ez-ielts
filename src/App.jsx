@@ -1,17 +1,19 @@
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { RequireAuth } from './components/auth/RequireAuth'
 import { SsoCallback } from './components/auth/SsoCallback'
-import { authEnabled } from './features/auth/authConfig'
+import { HomeworkScreen } from './components/homework/HomeworkScreen'
+import { MarkedEssay } from './components/homework/MarkedEssay'
 import { InterviewScreen } from './components/interview/InterviewScreen'
 import { AppLayout } from './components/layout/AppLayout'
 import { FocusHeader } from './components/layout/FocusHeader'
 import { ScreenPlaceholder } from './components/layout/ScreenPlaceholder'
-import { HomeworkScreen } from './components/homework/HomeworkScreen'
-import { MarkedEssay } from './components/homework/MarkedEssay'
-import { PlanScreen } from './components/plan/PlanScreen'
-import { TutorScreen } from './components/tutor/TutorScreen'
 import { WelcomeScreen } from './components/onboarding/WelcomeScreen'
+import { PlanScreen } from './components/plan/PlanScreen'
+import { PricingScreen } from './components/pricing/PricingScreen'
+import { SettingsScreen } from './components/settings/SettingsScreen'
 import { TodayScreen } from './components/today/TodayScreen'
+import { TutorScreen } from './components/tutor/TutorScreen'
+import { authEnabled } from './features/auth/authConfig'
 
 // Focus mode: no tabs. `exitTo` adds "Save and exit" (not shown during onboarding).
 function FocusLayout({ label, exitTo, children }) {
@@ -39,8 +41,8 @@ function App() {
           <Route path="/homework" element={<HomeworkScreen />} />
           <Route path="/homework/:id" element={<MarkedEssay />} />
           <Route path="/tutor" element={<TutorScreen />} />
-          <Route path="/pricing" element={<ScreenPlaceholder title="Pricing" />} />
-          <Route path="/settings" element={<ScreenPlaceholder title="Settings" />} />
+          <Route path="/pricing" element={<PricingScreen />} />
+          <Route path="/settings" element={<SettingsScreen />} />
         </Route>
       </Route>
     </Routes>
