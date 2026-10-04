@@ -11,6 +11,7 @@ import { WelcomeScreen } from './components/onboarding/WelcomeScreen'
 import { PlanScreen } from './components/plan/PlanScreen'
 import { PricingScreen } from './components/pricing/PricingScreen'
 import { SettingsScreen } from './components/settings/SettingsScreen'
+import { SpeakingScreen } from './components/speaking/SpeakingScreen'
 import { TodayScreen } from './components/today/TodayScreen'
 import { TutorScreen } from './components/tutor/TutorScreen'
 import { authEnabled } from './features/auth/authConfig'
@@ -33,7 +34,7 @@ function App() {
       {authEnabled && <Route path="/sso-callback" element={<SsoCallback />} />}
       <Route element={<RequireAuth />}>
         <Route path="/interview" element={<FocusLayout label="Interview"><InterviewScreen /></FocusLayout>} />
-        <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><ScreenPlaceholder title="Speaking practice" /></FocusLayout>} />
+        <Route path="/speaking/:id" element={<FocusLayout label="Speaking practice" exitTo="/today"><SpeakingScreen /></FocusLayout>} />
         <Route path="/mock/:id" element={<FocusLayout label="Checkpoint mock" exitTo="/plan"><ScreenPlaceholder title="Checkpoint mock" /></FocusLayout>} />
         <Route element={<AppLayout />}>
           <Route path="/today" element={<TodayScreen />} />
