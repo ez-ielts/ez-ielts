@@ -4,6 +4,7 @@ import intakeReducer from '../features/intake/intakeSlice'
 import planReducer from '../features/plan/planSlice'
 import sessionReducer from '../features/session/sessionSlice'
 import todayReducer from '../features/today/todaySlice'
+import tutorReducer from '../features/tutor/tutorSlice'
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     homework: homeworkReducer,
     intake: intakeReducer,
     today: todayReducer,
+    tutor: tutorReducer,
   },
 })
