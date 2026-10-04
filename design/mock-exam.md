@@ -1,6 +1,6 @@
 # Checkpoint mock exam
 
-Route: `/mock/:id` (focus mode, header label "Checkpoint mock", "Save and exit" → Plan). Ids are `week-4` and `week-8`, the checkpoint weeks in the plan. An id that is not a checkpoint of the course shows "Mock not found" with a link to the plan.
+Route: `/mock/:id` (focus mode, header label "Checkpoint mock", "Save and exit" → Plan). Ids are `week-4` and `week-8`, the checkpoint weeks in the plan. An id that is not a checkpoint of the course shows "Mock not found" with a link to the plan. A checkpoint whose week has not been reached shows "This checkpoint unlocks in week N" with a link to the plan. Finishing the checkpoint of the current week advances the plan (see [progress](progress.md)).
 
 ## Flow
 

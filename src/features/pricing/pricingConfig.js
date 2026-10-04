@@ -1,3 +1,4 @@
+import { courseTarget } from '../intake/intakeConfig'
 import { examLabels } from '../session/sessionSlice'
 
 // Mock pricing until the billing API exists. Each course is one half-band step on the exam's scale; prices are USD for the 8-week course.
@@ -17,6 +18,11 @@ export const pricingTiers = {
     { id: 'mastery', name: 'Mastery', range: '4.5 → 5.0', price: 199 },
   ],
 }
+
+// The pricing level whose half-band step begins at the learner's start estimate, if there is one.
+export const courseTier = (exam, start) => pricingTiers[exam].find((tier) => tier.range.startsWith(`${start} `)) ?? null
+
+export const courseName = (exam, start) => `${courseTier(exam, start)?.name ?? 'Course'} ${start} → ${courseTarget(start)}`
 
 export const includedInEveryCourse = [
   { label: 'Daily session', value: 'Lesson, practice, drill' },

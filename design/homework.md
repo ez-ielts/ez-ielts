@@ -5,10 +5,11 @@ Routes: `/homework` (list) and `/homework/:id` (marked essay or assignment). Bot
 ## Homework list
 
 - Header: kicker "Homework", H1 "What's due and what's marked", lede with counts.
-- Three ruled groups, in this order and only when non-empty:
+- Four ruled groups, in this order and only when non-empty (see [progress](progress.md)):
   1. **Overdue**: accent-labelled group. Each row has a text "Overdue · due {day}" label. Includes the rule that a second late submission voids the guarantee.
   2. **To do**: rows with a due label.
-  3. **Marked**: rows with the result ("Band 5.5", or "8 of 10" for objective work).
+  3. **Submitted**: rows labelled "Submitted · awaiting marking".
+  4. **Marked**: rows with the result ("Band 5.5", or "8 of 10" for objective work).
 - Row: skill kicker (Writing, Reading, Speaking…), title, task type and detail, a text status, and one action. Writing rows open `/homework/:id`; speaking rows open `/speaking/:id`; reading and other rows open `/homework/:id`.
 - States: loading ("Loading homework…", `role="status"`), error (`AlertBand` with Try again), empty ("Nothing assigned yet").
 - Mobile: rows wrap, the action drops below the text, 44px targets.
@@ -19,7 +20,7 @@ Routes: `/homework` (list) and `/homework/:id` (marked essay or assignment). Bot
 - **Result**: score numeral (66px) with "Estimated band · not an official result", then the criteria grid (ruled): the exam's four writing criteria, each with its band and a one-line comment. IELTS: Task Response, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy. TOEFL (1–6 scale): Task and development, Organization, Vocabulary, Grammar and mechanics.
 - **Annotated essay** and **Feedback** side by side (stacked on narrow screens). Marked passages are underlined with a superscript number, never colour alone; each number matches a feedback note naming its criterion. The feedback list says how many errors of that kind exist in total when more are marked than shown.
 - **Next action** box: what to practise next, linking to the relevant screen.
-- Unmarked or unknown id: "This assignment has not been marked yet" with the back link. No error is raised.
+- Open assignment (To do or Overdue): its details and a submit control (Writing: textarea with word count and "Submit for marking"; other skills: "Mark as submitted"). Submitted: "Submitted. Marking appears here." Unknown id: "We could not find that assignment."
 
 ## Data and state
 

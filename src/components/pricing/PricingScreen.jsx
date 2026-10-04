@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { intakeExams } from '../../features/intake/intakeConfig'
 import { selectPlan } from '../../features/plan/planSlice'
-import { includedInEveryCourse, planLabel, pricingTiers } from '../../features/pricing/pricingConfig'
+import { selectIntakeProfile } from '../../features/intake/intakeSlice'
+import { courseTier, includedInEveryCourse, planLabel, pricingTiers } from '../../features/pricing/pricingConfig'
 import { chooseTier, startTrial } from '../../features/session/sessionSlice'
 import { GuaranteeConditions } from '../course/GuaranteeConditions'
 import { Button } from '../ui/Button'
@@ -21,7 +21,8 @@ export function PricingScreen() {
   const dispatch = useDispatch()
   const { exam, tier } = useSelector((state) => state.session)
   const plan = useSelector(selectPlan)
-  const myTier = intakeExams[exam].course.split(' ')[0].toLowerCase()
+  const profile = useSelector(selectIntakeProfile)
+  const myTier = courseTier(exam, profile.start)?.id
   const paid = tier && tier !== 'trial'
 
   return (

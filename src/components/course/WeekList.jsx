@@ -4,7 +4,7 @@ import { Kicker } from '../ui/Kicker'
 const statusLabels = { done: 'Done', current: 'This week', upcoming: 'Upcoming' }
 
 // weeks: [{ title, focus, checkpoint }]. With `currentWeek`, every week also shows a text status;
-// `checkpointTo(weekNumber)` makes checkpoint weeks link to their mock; `checkpointResults` ({ [week]: { overall } }) shows a finished mock's band.
+// `checkpointTo(weekNumber)` makes checkpoint weeks link to their mock once their week is reached ("Unlocks in week N" before that); `checkpointResults` ({ [week]: { overall } }) shows a finished mock's band.
 export function WeekList({ weeks, currentWeek, checkpointTo, checkpointResults = {} }) {
   const tracked = currentWeek !== undefined
   return (
@@ -25,7 +25,8 @@ export function WeekList({ weeks, currentWeek, checkpointTo, checkpointResults =
             <div className="mt-0.5 text-[15px] font-bold">{week.title}</div>
             <div className="mt-0.5 text-[12.5px] text-neutral-800">{week.focus}</div>
             {checkpointResults[number] && <div className="mt-1 text-[12.5px] font-bold">Mock result: {checkpointResults[number].overall}</div>}
-            {week.checkpoint && checkpointTo && (
+            {week.checkpoint && checkpointTo && tracked && number > currentWeek && <div className="mt-2 inline-flex min-h-11 items-center text-[13px] font-bold text-neutral-800">Unlocks in week {number}</div>}
+            {week.checkpoint && checkpointTo && (!tracked || number <= currentWeek) && (
               <Link to={checkpointTo(number)} className="mt-2 inline-flex min-h-11 items-center text-[13px] font-bold text-accent-700 underline underline-offset-[3px]">{checkpointResults[number] ? 'Retake checkpoint mock' : 'Checkpoint mock'}</Link>
             )}
           </li>

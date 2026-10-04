@@ -1,11 +1,10 @@
 import { examLabels } from '../session/sessionSlice'
 
-// Course-intake data per exam. `start` is the placement estimate until the placement slice supplies a real one.
+// Course-intake data per exam. `start` is the initial placement estimate; `intake.start` holds the live value.
 export const intakeExams = {
   ielts: {
     label: examLabels.ielts,
     start: '5.5',
-    course: 'Core 5.5 → 6.0',
     weeks: [
       ['Diagnose and rebuild', 'Task 2 structure, articles'],
       ['Task 1 data language', 'Trend verbs, overview sentence'],
@@ -20,7 +19,6 @@ export const intakeExams = {
   toefl: {
     label: examLabels.toefl,
     start: '3.5',
-    course: 'Core 3.5 → 4.0',
     weeks: [
       ['Diagnose and rebuild', 'Build a Sentence, grammar'],
       ['Write an Email', 'Register, task coverage'],

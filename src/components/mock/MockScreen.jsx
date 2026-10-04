@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useHomework } from '../../features/homework/useHomework'
+import { selectPlan } from '../../features/plan/planSlice'
 import { checkpointIds, mockContent, mockSections } from '../../features/mock/mockConfig'
 import { choiceMade, finishSection, finishSpeaking, mockReset, mockStarted, submitMock, writingChanged } from '../../features/mock/mockSlice'
 import { AlertBand } from '../ui/AlertBand'
@@ -62,6 +63,19 @@ function MockSession({ id, week }) {
 export function MockScreen() {
   const { id } = useParams()
   const week = checkpointIds[id]
+
+  const plan = useSelector(selectPlan)
+
+  if (week && week > plan.currentWeek) {
+    return (
+      <main className={page}>
+        <Kicker tone="accent">Checkpoint · week {week}</Kicker>
+        <h1 className="m-0 text-[clamp(26px,4vw,40px)] leading-[1.05] font-extrabold tracking-[-.025em]">This checkpoint unlocks in week {week}</h1>
+        <p className="m-0 text-neutral-800">You are in week {plan.currentWeek}. Finish this week's sessions first.</p>
+        <Link to="/plan" className="inline-flex min-h-11 items-center self-start font-bold text-accent-700 underline underline-offset-[3px]">Back to your plan</Link>
+      </main>
+    )
+  }
 
   if (!week) {
     return (

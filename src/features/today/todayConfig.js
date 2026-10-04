@@ -2,7 +2,6 @@
 // marked[].to is the route the card opens.
 export const todayContent = {
   ielts: {
-    dayLabel: 'Monday · day 1 of week 3',
     title: 'Task 1 data description',
     lede: 'Three parts, 45 minutes. Your writing band moved to 5.5 last week. This week is built to take it to 6.0.',
     steps: [
@@ -32,7 +31,6 @@ export const todayContent = {
     tutorNote: '"Research" is uncountable: research shows, never "the researches". That error has cost you marks in two essays.',
   },
   toefl: {
-    dayLabel: 'Monday · day 1 of week 3',
     title: 'Write an Email',
     lede: 'Three parts, 45 minutes. Writing moved to 3.5 last week. This week targets 4.0 by covering every point in the task.',
     steps: [
