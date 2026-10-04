@@ -1,42 +1,33 @@
+import { ApiError, apiEnabled, apiRequest } from '../../lib/apiClient'
 import { DONE_MARKER, intakeInstructions } from './intakePrompt'
 import { intakeExams } from './intakeConfig'
 
 // Backend contract: POST {VITE_API_BASE_URL}/intake/messages
 //   body:     { exam, profile, instructions, messages: [{ role: 'user' | 'assistant', content }] }
 //   response: { text }  (the model reply; it ends with [DONE] when the interview is complete)
-// The model API key lives on the backend only. Without VITE_API_BASE_URL a scripted local tutor runs so the flow works in development.
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
-
+// The model API key lives on the backend only. The request is authenticated by the shared API client. Without VITE_API_BASE_URL a scripted local tutor runs so the flow works in development.
 const OPENER = { role: 'user', content: 'Hi, I am ready.' }
 
 export class IntakeServiceError extends Error {
   constructor(kind, message) {
     super(message)
-    this.kind = kind // 'rate_limit' | 'network'
+    this.kind = kind // 'rate_limit' | 'unauthorized' | 'network'
   }
 }
 
 export async function requestIntakeReply({ exam, profile, messages }) {
   const payload = messages.length ? messages : [OPENER]
-  const text = apiBaseUrl ? await fetchReply({ exam, profile, messages: payload }) : await localReply({ exam, profile, messages })
+  const text = apiEnabled ? await fetchReply({ exam, profile, messages: payload }) : await localReply({ exam, profile, messages })
   return { text: text.replace(DONE_MARKER, '').trim(), done: text.includes(DONE_MARKER) }
 }
 
 async function fetchReply({ exam, profile, messages }) {
-  let response
+  let data
   try {
-    response = await fetch(`${apiBaseUrl}/intake/messages`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ exam, profile, instructions: intakeInstructions(exam, profile), messages }),
-    })
-  } catch {
-    throw new IntakeServiceError('network', 'Network request failed')
+    data = await apiRequest('/intake/messages', { method: 'POST', body: { exam, profile, instructions: intakeInstructions(exam, profile), messages } })
+  } catch (error) {
+    throw new IntakeServiceError(error instanceof ApiError ? error.kind : 'network', error.message)
   }
-  if (response.status === 429) throw new IntakeServiceError('rate_limit', 'Rate limited')
-  if (!response.ok) throw new IntakeServiceError('network', `Intake request failed with ${response.status}`)
-  const data = await response.json()
   if (typeof data?.text !== 'string') throw new IntakeServiceError('network', 'Malformed intake response')
   return data.text
 }

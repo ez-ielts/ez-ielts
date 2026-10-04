@@ -5,6 +5,7 @@ import { SummaryTable } from '../ui/SummaryTable'
 const errorCopy = {
   network: 'The tutor could not reply. Check your connection and try again, or skip the interview.',
   rate_limit: 'The tutor is getting a lot of requests right now. Wait a minute and try again, or skip the interview.',
+  unauthorized: 'Your session has expired. Sign in again, or skip the interview.',
 }
 
 export function TutorInterview({ summary, messages, loading, errorKind, done, onSend, onRetry, onBuildCourse, onSkip }) {

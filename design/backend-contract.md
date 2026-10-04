@@ -1,15 +1,27 @@
 # Backend contract (frontend expectations)
 
-Status: **draft for the backend design.** This lists what the frontend already calls or will need, taken from the service boundaries in `src/features/*/*Service.js` and the slices that hold learner state. Endpoints and names are proposals; change them in the backend repo and update this file. Today every service falls back to mock data when `VITE_API_BASE_URL` is unset.
+Status: **draft for the backend design.** Production API: `https://api.ez-ielts.nexisci.space`. Wired so far: `/intake/messages` and `/tutor/messages` (through the shared client below). Everything else waits for agreed shapes. This lists what the frontend already calls or will need, taken from the service boundaries in `src/features/*/*Service.js` and the slices that hold learner state. Endpoints and names are proposals; change them in the backend repo and update this file. Today every service falls back to mock data when `VITE_API_BASE_URL` is unset.
 
 ## Conventions
 
-- Base URL `VITE_API_BASE_URL`, versioned (`/v1`). JSON in and out. `credentials: 'include'` is already sent by the intake and tutor services.
+- Base URL `VITE_API_BASE_URL` (production `https://api.ez-ielts.nexisci.space`), including any version prefix; services use paths such as `/intake/messages` relative to it. JSON in and out. Requests use a bearer token, not cookies, so `credentials: 'include'` is not needed. The deployed app is built with `VITE_API_BASE_URL=https://api.ez-ielts.nexisci.space` (a public URL, set in `.github/workflows/deploy-pages.yml`; the repository variable `VITE_API_BASE_URL` overrides it). Local development leaves it empty and uses mock data.
 - **Auth**: the browser signs in with Clerk. Proposal: every request carries `Authorization: Bearer <Clerk session token>`; the backend verifies it against Clerk's JWKS and keys all data by the Clerk user id. No password or secret is ever handled in the browser. Only the publishable key is public.
 - **Errors**: `{ "error": { "code": "...", "message": "..." } }`. The frontend maps statuses to three kinds: **401** → sign in again; **429** → `rate_limit` (honour `Retry-After`); network failure or any other non-2xx → `network`. Every screen already has a retry state for these.
 - **Idempotency**: submits (`homework`, `mock`, `placement`, `progress`) accept an `Idempotency-Key` header so a retry never double counts (late submissions and sessions are counted).
 - **Exam**: `exam` is `ielts` or `toefl`. Bands are numbers in half-band steps on the exam's own scale (IELTS 0–9, TOEFL iBT 1–6). The server never returns a value outside the scale.
 - **The model key and Realtime session creation stay on the server** (CLAUDE.md). The browser never receives an unrestricted persistence tool.
+
+## CORS
+
+The app is served from `https://ez-ielts.nexisci.space` (and `http://localhost:5173` in development) and calls the API from the browser, so the API must:
+
+- allow those origins (not `*` once credentials or the `Authorization` header are involved);
+- allow methods `GET, POST, PUT, OPTIONS` and request headers `Authorization, Content-Type, Idempotency-Key`, and answer preflight `OPTIONS` requests;
+- list `Retry-After` in `Access-Control-Expose-Headers`, otherwise the browser hides it from the 429 handler.
+
+## Frontend client (`src/lib/apiClient.js`)
+
+All calls go through one client. It adds `Authorization: Bearer <Clerk session token>` (read from the active Clerk session; omitted when nobody is signed in), `Content-Type: application/json` when there is a body and `Idempotency-Key` when given, and times out after 30 seconds. Responses map to `ApiError` kinds: **401 → `unauthorized`**, **429 → `rate_limit`** (with `retryAfter` seconds), **everything else, a timeout, a refused connection or a malformed body → `network`**; `204` returns `null`. Each service turns the kind into its own retry or sign-in message. With no base URL configured, services use their mock data.
 
 ## Endpoints
 
