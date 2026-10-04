@@ -67,5 +67,3 @@ export const todayContent = {
 
 // The first `measuredWeeks` trend bars are measured; the rest are forecast.
 export const measuredWeeks = 4
-
-export const courseProgress = { week: 3, weeks: 8 }

@@ -1,3 +1,5 @@
+import { GuaranteeConditions } from '../course/GuaranteeConditions'
+import { WeekList } from '../course/WeekList'
 import { Button } from '../ui/Button'
 import { Kicker } from '../ui/Kicker'
 
@@ -26,20 +28,9 @@ export function CourseSummary({ courseName, start, target, facts, weeks, onStart
         ))}
       </dl>
 
-      <ol className="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 p-0">
-        {weeks.map((week, index) => (
-          <li key={week.title} className={`border-t-4 pt-2 ${week.checkpoint ? 'border-accent' : 'border-ink'}`}>
-            <Kicker spacing="normal">Week {index + 1}</Kicker>
-            <div className="mt-0.5 text-[15px] font-bold">{week.title}</div>
-            <div className="mt-0.5 text-[12.5px] text-neutral-800">{week.focus}</div>
-          </li>
-        ))}
-      </ol>
+      <WeekList weeks={weeks} />
 
-      <div className="flex flex-col gap-2 border-2 border-ink p-4 text-[13.5px] leading-[1.55]">
-        <Kicker tone="accent">Band guarantee · conditions</Kicker>
-        <p className="m-0">Complete every assigned session and homework, with no more than one late submission, and sit both checkpoint mocks. If your final mock is below {target}, we extend the course free until it isn't.</p>
-      </div>
+      <GuaranteeConditions target={target} />
     </div>
   )
 }

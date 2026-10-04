@@ -27,7 +27,7 @@ Main column (flex 1.85, basis 420px) and aside (flex 1, basis 260px). The aside 
 
 ## State
 
-`today.stepsDone` (Redux). The content is placeholder data per exam in `src/features/today/todayConfig.js`, until the plan, homework and feedback slices supply it. The course week (`courseProgress`) is also a placeholder.
+`today.stepsDone` (Redux). The content is placeholder data per exam in `src/features/today/todayConfig.js`, until the plan, homework and feedback slices supply it. The course week now lives in the `plan` slice (placeholder, see [plan](plan.md)).
 
 ## Not built yet
 

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { checkpointWeeks, intakeExams, intakeQuestions, intakeStages, studyHours, targetHint } from '../../features/intake/intakeConfig'
+import { courseWeeks, intakeExams, intakeQuestions, intakeStages, studyHours, targetHint } from '../../features/intake/intakeConfig'
 import { answerChosen, beginInterview, reasonChanged, requestTutorReply, selectIntakeProfile, sendLearnerReply, stageChanged } from '../../features/intake/intakeSlice'
 import { startTrial } from '../../features/session/sessionSlice'
 import { StageStrip } from '../ui/StageStrip'
@@ -66,7 +66,7 @@ export function InterviewScreen() {
             { label: 'Study total', value: `${studyHours(profile)} hours`, note: 'plus homework' },
             { label: 'Checkpoints', value: 'Weeks 4 and 8', note: 'full timed mocks' },
           ]}
-          weeks={config.weeks.map(([title, focus], index) => ({ title, focus, checkpoint: checkpointWeeks.includes(index + 1) }))}
+          weeks={courseWeeks(exam)}
           onStartTrial={() => { dispatch(startTrial()); navigate('/today') }}
           onSeePricing={() => navigate('/pricing')}
         />

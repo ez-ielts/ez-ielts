@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { selectPlan } from '../../features/plan/planSlice'
 import { examLabels } from '../../features/session/sessionSlice'
-import { courseProgress } from '../../features/today/todayConfig'
 import { activeTabFor } from '../../lib/navigation'
 import { AppHeader } from './AppHeader'
 import { MobileTabBar } from './MobileTabBar'
@@ -11,6 +11,7 @@ export function AppLayout() {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const { exam, tier } = useSelector((state) => state.session)
+  const { currentWeek, totalWeeks } = useSelector(selectPlan)
   const activeTab = activeTabFor(pathname)
 
   return (
@@ -18,7 +19,7 @@ export function AppLayout() {
       <AppHeader
         activeTab={activeTab}
         examLabel={examLabels[exam]}
-        weekLabel={`Week ${courseProgress.week} of ${courseProgress.weeks}`}
+        weekLabel={`Week ${currentWeek} of ${totalWeeks}`}
         showUpgrade={tier === 'trial'}
         onExamTag={() => navigate('/plan')}
         onUpgrade={() => navigate('/pricing')}
